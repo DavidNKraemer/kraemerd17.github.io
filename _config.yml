@@ -2,17 +2,17 @@ title: David Kraemer
 description: Personal Site
 author: David Kraemer 
 logo: /assets/profile.jpg
-github: https://github.com/ashutosh2k12
-about: Undergraduate student &mdash; Lead developer 
+github: https://github.com/kraemerd17
+about: Undergraduate student <br/> Grinnell College
 
 baseurl: ""
 url: ""
 
-disqus_shortname: aboutashu
-google_analytics: UA-72862926-1
+disqus_shortname: 
+google_analytics: 
 
 share:
-  twitter_username: \#
+  twitter_username: \#david\_kraemer
   fb_appid: 000000000000
 
 

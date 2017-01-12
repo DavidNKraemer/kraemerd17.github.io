@@ -1,0 +1,994 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Introduction to \texttt{Python}}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Outline}\label{outline}
+
+    \begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Introduction to \texttt{Python}
+\item
+  Installing \texttt{Python}
+\item
+  Installing \texttt{IPython}
+\item
+  Installing additional libraries
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    \texttt{NumPy}
+  \item
+    \texttt{pandas}
+  \item
+    \texttt{Matplotlib}
+  \end{itemize}
+\item
+  A brief overview of syntax in \texttt{Python}
+\item
+  Some Labs
+\end{itemize}
+
+    \section{Installing \texttt{Python}}\label{installing-python}
+
+For this course, we will use \texttt{Python 2.7} over
+\texttt{Python 3.4}. Why is this? No particular reason, although
+\texttt{Python 2.7} is still the overall favorite of most developers. We
+will only be covering tools that are agnostic to the \texttt{2.7-3.4}
+war, so it shouldn't matter much.
+
+If you plan to install \texttt{Python} to your computer locally, you
+will have to install not only the \texttt{Python} libraries and
+interpreters themselves but the additional software that we will use
+throughout the course. This is a huge pain, and while this can be done
+manually, we highly recommend you use a third-party package management
+program.
+
+We have experimented with each of the different package management
+tools, and our favorite is Anaconda, provided by Continuum analytics.
+However, you can make your set-up work with any package manager. We just
+think it's the easiest with Anaconda.
+
+    \subsection{Anaconda}\label{anaconda}
+
+To install Anaconda, go the
+\href{https://store.continuum.io/cshop/anaconda/}{Continuum Store} and
+select ``Download Anaconda.'' This will require you to enter an email
+address, though this does not have to be linked to promotional emails.
+After doing this, you will be sent to a page to download the correct
+version for your local operating system. Download the correct installer
+for your OS, and run the corresponding installation programs once it is
+complete.
+
+For Unix users, this means moving to the Downloads directory and
+entering
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{bash} \NormalTok{Anaconda-2.1.0-[Linux or MacOSX]-x86_[32 or 64].sh}
+\end{Highlighting}
+\end{Shaded}
+
+The instructions are on the download page. For Windows users, just
+double-click the \texttt{.exe} file and follow the requisite
+instructions.
+
+Once Anaconda is installed, open a terminal and type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{conda} \NormalTok{update conda}
+\KeywordTok{conda} \NormalTok{update ipython ipython-notebook ipython-qtconsole}
+\end{Highlighting}
+\end{Shaded}
+
+This should install the IPython software we will use throughout the
+course, while also updating all of the \texttt{Python} libraries.
+
+    \subsubsection{Wakari Cloud}\label{wakari-cloud}
+
+If you don't want to install \texttt{Python} packages locally, Continuum
+Analytics has a cloud-based solution, Wakari. It's not designed for
+extensive individual use, and it hasn't updated IPython to the latest
+version, but it is permissible for our course. To get started, make an
+account on \href{https://wakari.io/}{Wakari.io}, which will give you
+your own directory for IPython projects.
+
+    \subsection{Canopy}\label{canopy}
+
+Canopy is an alternative to Anaconda, which includes its own integrated
+development environment on top of a package manager. We don't recommend
+using Canopy because we found it difficult to update to the latest
+version of the IPython notebook, and there seems to be issues with the
+\texttt{matplotlib} engine outside of the Canopy IDE.
+
+However, if you desire, you can install Canopy by going to the
+\href{https://store.enthought.com/downloads/}{Enthought Store} and
+selecting ``DOWNLOAD Canopy Express''. This will require that you make
+an account with Enthought. One benefit of making an account and then
+identifying yourself as a student is that it can give you access to
+tutorial videos on \texttt{Python} and its data analysis libraries (this
+privilege can be finicky, however).
+
+From there, simply install the Canopy program that you download from the
+site, and open it. Canopy gives a graphical package manager, which you
+might find appealing (we don't).
+
+    \subsection{Manual installation}\label{manual-installation}
+
+Manual installation is, simply put, a pain in the neck. We don't
+recommend doing this, because it is quite complicated. To be fair, we
+will call using \texttt{pip} as manual installation, even though this
+simplifies true manual installation quite significantly. In fact, we
+won't go into details (to discourage you from trying). It can be done,
+by following (roughly) these steps:
+
+\begin{itemize}
+\item
+  Downloading and installing \texttt{Python 2.7} (or \texttt{3.4}) from
+  the \href{https://www.python.org/downloads/}{Official Website}
+\item
+  Hopefully, after the installation, you can call the program
+  \texttt{python} from the terminal. This is not guaranteed. If you are
+  lucky, download
+  \href{https://bootstrap.pypa.io/get-pip.py}{get-pip.py}, and run
+  \texttt{python get-pip.py} from the relevant directory.
+\item
+  This should install \texttt{pip}. From here, run
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pip} \NormalTok{install numpy}
+\KeywordTok{pip} \NormalTok{install scipy}
+\KeywordTok{pip} \NormalTok{install matplotlib}
+\KeywordTok{pip} \NormalTok{install pandas}
+\KeywordTok{pip} \NormalTok{install ipython[all]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  If the gods are smiling on you, this will install everything you need
+  for this class, and you should be good to go.
+\end{itemize}
+
+    \subsection{A simple \texttt{Python}
+script}\label{a-simple-python-script}
+
+Open a terminal (Windows users: your ``terminal'' is technically called
+the Command Prompt, \texttt{cmd.exe}, but we will use ``terminal''
+colloquially) and enter \texttt{ipython}. Check to see that the packages
+we will be using in this course are properly installed by entering the
+following code into the terminal:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ipython}
+\end{Highlighting}
+\end{Shaded}
+
+If everything is installed properly, this should launch the
+\texttt{IPython} shell. This is a simple interpreter, which is handy to
+use from time to time, but we will not use it in this course. However,
+we can take this opportunity to write a simple line of code into the
+interpreter:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{print} \StringTok{"Hello, world!"}
+\end{Highlighting}
+\end{Shaded}
+
+Congratulations, you have officially been inducted into the wonderful
+world of computing in \texttt{Python}!
+
+\section{Python basics}\label{python-basics}
+
+\texttt{Python} works like other programming languages in that it has
+some built-in types:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{int}, an integer type (default precision: 32-bit)
+\item
+  \texttt{float}, a floating-point type (default precision: 64-bit)
+\item
+  \texttt{long}, an integer type (unlimited precision)
+\item
+  \texttt{str}, a string literal type
+\item
+  \texttt{Boolean}, a boolean type
+\end{itemize}
+
+Variable initialization in \texttt{Python} is different than the
+\texttt{C} family of languages because variable type is \textbf{not}
+specified. In \texttt{C}, you have to declare the type immediately:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{double} \NormalTok{var = }\FloatTok{1.61}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+The equivalent \texttt{Python} code is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var = }\FloatTok{1.61}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Try it!}\label{try-it}
+
+Open an \texttt{IPython Notebook} file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ipython} \NormalTok{notebook}
+\end{Highlighting}
+\end{Shaded}
+
+Use the next few examples to get a feel for \texttt{Python}'s style of
+variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{20}
+        \PY{k}{print} \PY{n}{a} \PY{o}{+} \PY{n}{b}
+        \PY{k}{print} \PY{n}{a} \PY{o}{==} \PY{n}{b}
+        \PY{k}{print} \PY{o+ow}{not} \PY{p}{(} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+30
+False
+True
+    \end{Verbatim}
+
+    \subsection{Arithmetic}\label{arithmetic}
+
+\texttt{Python} arithmetic is what you would expect. \texttt{+, -, *, /}
+are all defined as normal, but the operation \texttt{x ** y} is
+equivalent to $x^y$.
+
+\subsection{Pointers in Python:}\label{pointers-in-python}
+
+What do you expect will happen when you run the following code?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{10.42}
+        \PY{n}{y} \PY{o}{=} \PY{n}{x}
+        \PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{12.}
+        \PY{k}{print} \PY{n}{y}
+        
+        \PY{n}{str1} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Hello}\PY{l+s}{\PYZdq{}}
+        \PY{n}{str2} \PY{o}{=} \PY{n}{str1}
+        \PY{n}{str1} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{ world!}\PY{l+s}{\PYZdq{}}
+        \PY{k}{print} \PY{n}{str2}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10.42
+Hello
+    \end{Verbatim}
+
+    In \texttt{Python}, everything is a pointer, but \texttt{Python} will
+try to behave like you intend it to (no horrible \texttt{C}-like
+issues).
+
+Boolean expressions in \texttt{Python} are designed with readability in
+mind. What do you expect the following output will be?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{1.23} 
+        \PY{n}{y} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}
+        \PY{n}{bool\PYZus{}one} \PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{y}\PY{p}{)}
+        \PY{n}{bool\PYZus{}two} \PY{o}{=} \PY{p}{(}\PY{n}{y} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{\PYZlt{}} \PY{n}{x}\PY{p}{)}
+        
+        \PY{k}{print} \PY{p}{(}\PY{o+ow}{not} \PY{n}{bool\PYZus{}one}\PY{p}{)} \PY{o+ow}{or} \PY{n}{bool\PYZus{}two}
+        \PY{k}{print} \PY{n}{bool\PYZus{}one} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n}{bool\PYZus{}two}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+False
+True
+    \end{Verbatim}
+
+    \subsection{Lists}\label{lists}
+
+There is not a native array type in \texttt{Python} like there is in
+\texttt{C} and \texttt{Java}. Instead, \texttt{Python} follows a similar
+model to \texttt{Scheme} in that the core native ``iterable'' data type
+is a (linked) list. Lists are initialized in \texttt{Python} by
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_list = [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Lists indices begin at 0 (Sorry, \texttt{MATLAB} and \texttt{R} users),
+so \texttt{my\_list{[}0{]} = 1}. Lists are endowed with some very useful
+functions:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{append}, which adds an element to the end of the list.
+\item
+  \texttt{index}, which searches a list for a particular value.
+\item
+  \texttt{insert}, which adds an element after a specified location.
+\end{itemize}
+
+One important concept in \texttt{Python} is list \emph{slicing}, which
+allows you to quickly access sections of a list without much code
+overhead. For example, if I wish to obtain the middle three elements of
+\texttt{my\_list}, I can simply type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mid_three = my_list[}\DecValTok{1}\NormalTok{:}\DecValTok{4}\NormalTok{:}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+The braces \texttt{{[}1:4:1{]}} should be read as telling the list to
+start at the 1th (that is, second) index and go until the 4th (that is,
+fifth) index, incrementing by 1. So, the 1 is ``inclusive'', whereas the
+4 is ``exclusive.'' One can reach the last element of a list easily
+without knowing the length of the list by writing
+\texttt{my\_list{[}-1{]}}. In general, the \texttt{-} indicates that you
+want to traverse the list in the opposite direction.
+
+\subsubsection{Try it!}\label{try-it}
+
+What do you expect the following code will produce?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{example} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{5.}\PY{p}{,} \PY{l+m+mf}{7.}\PY{p}{,} \PY{l+m+mf}{9.}\PY{p}{,} \PY{l+m+mf}{11.}\PY{p}{,} \PY{l+m+mf}{14.}\PY{p}{]}
+        
+        \PY{n}{example}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{82.}\PY{p}{)}
+        
+        \PY{n}{example}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{)}
+        
+        \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Example: }\PY{l+s+se}{\PYZbs{}t}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{example}
+        \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{example}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} 
+        \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{example}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{p}{]}
+        \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{example}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Example: 	[3.0, 5.0, 7.0, 1.0, 9.0, 11.0, 14.0, 82.0]
+		[3.0, 5.0]
+		[1.0, 9.0, 11.0, 14.0, 82.0]
+		[82.0, 14.0, 11.0, 9.0, 1.0, 7.0, 5.0, 3.0]
+    \end{Verbatim}
+
+    \subsection{Conditionals}\label{conditionals}
+
+\texttt{Python} uses \texttt{if-elif-else} branching very much like the
+\texttt{C} family uses \texttt{if-else if-else} statements. There is no
+\texttt{Python} equivalent to \texttt{switch}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{if} \OtherTok{True}\NormalTok{:}
+    \DataTypeTok{print} \StringTok{"this will happen"}
+\KeywordTok{else}\NormalTok{: }
+    \DataTypeTok{print} \StringTok{"this will not happen"}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that \texttt{Python} is sensitive to white-spaces. The
+\texttt{IPython Notebook} is clever enough to handle proper spacing for
+you.
+
+\subsubsection{Try it!}\label{try-it}
+
+What do you think will happen when you execute the following snippets of
+code?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{if} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{1 \PYZlt{} 0}\PY{l+s}{\PYZdq{}}
+         \PY{k}{elif} \PY{l+m+mi}{1} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{1 \PYZgt{} 2}\PY{l+s}{\PYZdq{}}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{if} \PY{l+m+mi}{1} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{1 \PYZlt{}= 1}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+          File "<ipython-input-10-d824fa9aecd4>", line 7
+        print "1 <= 1"
+            \^{}
+    IndentationError: expected an indented block
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{this}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{4}\PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{what do you think len() does?}\PY{l+s}{\PYZdq{}}
+         \PY{k}{elif} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{+} \PY{l+m+mi}{4} \PY{o}{\PYZhy{}} \PY{l+m+mi}{6}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{7 \PYZhy{} 36 \PYZlt{} 0}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+7 - 36 < 0
+    \end{Verbatim}
+
+    The \texttt{if} condition can be used independently of \texttt{elif} and
+\texttt{else}, much like in \texttt{C}. But if you use \texttt{elif},
+you must use an \texttt{else}.
+
+\subsubsection{Loops}\label{loops}
+
+There are two main loop constructions in \texttt{Python}: \texttt{for}
+and \texttt{while}. The \texttt{while} loop operates much like its
+\texttt{C} counterpart does. It is given a boolean statement that, while
+true, executes the subsequent code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{while} \PY{n}{a} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{:}
+             \PY{k}{print} \PY{n}{a}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n}{a} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+    \end{Verbatim}
+
+    The \texttt{for} loop, by contrast, operates differently than the C
+version. In C, there are three parts
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{for} \NormalTok{(loop initialization ; condition ; update)}
+\NormalTok{\{}
+    \NormalTok{code;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+In this sense, \texttt{for} is structurally identical to \texttt{while};
+it just is set up differently. In \texttt{Python}, \texttt{for} takes
+some sort of \emph{iterable} type and iterates through it:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Adam}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Amy}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Alex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Alfonzo}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Adrianne}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Abbie}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Al}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{k}{print} \PY{n}{name}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{is cool}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Adam is cool
+Amy is cool
+Alex is cool
+Alfonzo is cool
+Adrianne is cool
+Abbie is cool
+Al is cool
+    \end{Verbatim}
+
+    The variable \texttt{name} cycles through the list of names, printing it
+in each step of the loop. This is essentially the same as
+\texttt{Java}'s enhanced \texttt{for} loop, and you will learn to love
+it. If you don't, and you just want to have an index \texttt{i} to go
+from 0 to 9, you can use
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print} \PY{n}{i}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+    \end{Verbatim}
+
+    This achieves the same effect as the C \texttt{for} loop.
+
+\subsection{Functions}\label{functions}
+
+In \texttt{Python}, functions are easy to program. The general syntax is
+as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def} \NormalTok{foo(args):}
+    \NormalTok{[do stuff]}
+    \KeywordTok{return} \NormalTok{bar }\CommentTok{# optional}
+\end{Highlighting}
+\end{Shaded}
+
+Simply pass the arguments you want to include into the function, do
+whatever you want inside the function (don't forget the whitespace!),
+and \texttt{return} as you would in \texttt{C}.
+
+\subsubsection{Try it!}\label{try-it}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Write a function, \texttt{print\_args}, that prints each argument
+  passed to it in one line.
+\item
+  Write a function, \texttt{list\_float\_to\_int}, that converts an
+  integer list into a float list.
+\item
+  Write a function, \texttt{centered\_average}, which returns the
+  arithmetic average of a list, excluding the largest and the smallest
+  elements.
+\end{enumerate}
+
+\section{Lab Activity: The Bisection
+Method}\label{lab-activity-the-bisection-method}
+
+Those of you who have taken a few computer science courses may have
+learned about something called the ``Binary Search'', which allows you
+to quickly find an element of an unordered list. We will extend this
+idea to allow us to find roots of continuous functions over a closed
+interval.
+
+The idea for this procedure comes from the Intermediate Value Theorem:
+if you have a continuous function $f(x)$ on an interval $[a,b]$ for
+which you know that $f(a)<0$ but $f(b)>0$, then there must be some
+intermediary point $c$ satisfying $f(c)=0$. The Bisection Method
+provides us with a procedure for finding such a $c$. Here's how it
+works:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Start with a function $f(x)$ on an interval $[a,b]$ that you know it
+  is continuous over.
+\item
+  Evaluate $f(a)$ and $f(b)$. Figure out which direction is positive and
+  which one is negative. (Let's assume $f(a)<0$ and $f(b)>0$ for this
+  description).
+\item
+  Choose the point $c'=\dfrac{a+b}{2}$, and evaluate $f(c')$.
+\item
+  If $f(c')<0$, then you know that the root of the function must be to
+  the right of $c'$, so set $a=c'$ and repeat this search.
+\item
+  If $f(c')>0$, then you know that the root of the function must be to
+  the left of $c'$, so set $b=c'$ and repeat this search.
+\item
+  Continue until you reach an arbitrary precision of your choice (or
+  terminating after a finite number of steps).
+\end{enumerate}
+
+Your task is to implement this function in \texttt{Python}. Use this to
+come up with an approximation of $\pi$. \emph{Bonus}: Store an array to
+keep track of all of your $c'$ values.
+
+\subsubsection{Our solution}\label{our-solution}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CharTok{from} \NormalTok{numpy }\CharTok{import} \NormalTok{sin}
+\KeywordTok{def} \NormalTok{bisection_method(ufunc, a, b, N):}
+    \NormalTok{err = }\FloatTok{1e-20}
+    \KeywordTok{if} \NormalTok{ufunc(a) > }\DecValTok{0}\NormalTok{.: }\CommentTok{# forces f(a) to be a lower bound}
+        \NormalTok{temp = a}
+        \NormalTok{a = b}
+        \NormalTok{b = temp}
+    \NormalTok{c = }\FloatTok{0.5} \NormalTok{* (a + b)}
+    \NormalTok{fc = ufunc(c)}
+    \NormalTok{cvals = [c]}
+    \KeywordTok{for} \NormalTok{i in }\DataTypeTok{range}\NormalTok{(N):}
+        \KeywordTok{if} \NormalTok{-err < fc and fc < err: }\CommentTok{# if fc is within an error tolerance of 0}
+            \KeywordTok{return} \NormalTok{c}
+        \KeywordTok{elif} \NormalTok{fc < }\DecValTok{0}\NormalTok{.:}
+            \NormalTok{a = c}
+        \KeywordTok{else}\NormalTok{:}
+            \NormalTok{b = c}
+        \NormalTok{c = }\FloatTok{0.5} \NormalTok{* (a + b)}
+        \NormalTok{cvals.append(c)}
+        \NormalTok{fc = ufunc(c)}
+    \KeywordTok{return} \NormalTok{c, cvals}
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively, you can implement this recursively.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def} \NormalTok{bisection_method_rec(ufunc, a, b, N):}
+    \NormalTok{err = }\FloatTok{1e-20}
+    \KeywordTok{if} \NormalTok{ufunc(a) > }\DecValTok{0}\NormalTok{.:}
+        \KeywordTok{return} \NormalTok{bisection_method_rec(ufunc, b, a, N)}
+    \NormalTok{c = }\FloatTok{0.5} \NormalTok{* (a + b)}
+    \NormalTok{fc = ufunc(c)}
+    \KeywordTok{for} \NormalTok{i in }\DataTypeTok{range}\NormalTok{(N):}
+        \KeywordTok{if} \DataTypeTok{abs}\NormalTok{(fc) < err or N == }\DecValTok{0}\NormalTok{:}
+            \KeywordTok{return} \NormalTok{c}
+        \KeywordTok{elif} \NormalTok{fc < }\DecValTok{0}\NormalTok{.:}
+            \KeywordTok{return} \NormalTok{bisection_method_rec(ufunc, c, b, N}\DecValTok{-1}\NormalTok{)}
+        \KeywordTok{else}\NormalTok{:}
+            \KeywordTok{return} \NormalTok{bisection_method_rec(ufunc, a, c, N}\DecValTok{-1}\NormalTok{)}
+    \KeywordTok{return} \NormalTok{c}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{bisection\PYZus{}method\PYZus{}rec}\PY{p}{(}\PY{n}{ufunc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{N}\PY{p}{)}\PY{p}{:}
+             \PY{n}{err} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}20}
+             \PY{k}{if} \PY{n}{ufunc}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{bisection\PYZus{}method\PYZus{}rec}\PY{p}{(}\PY{n}{ufunc}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+             \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{p}{)}
+             \PY{n}{fc} \PY{o}{=} \PY{n}{ufunc}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{fc}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{err} \PY{o+ow}{or} \PY{n}{N} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{c}
+                 \PY{k}{elif} \PY{n}{fc} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{bisection\PYZus{}method\PYZus{}rec}\PY{p}{(}\PY{n}{ufunc}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{N}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{bisection\PYZus{}method\PYZus{}rec}\PY{p}{(}\PY{n}{ufunc}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{N}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{c}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{print} \PY{n}{bisection\PYZus{}method\PYZus{}rec}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{*}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{2.}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.73205080757
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+         
+         \PY{n}{Embed} \PY{o}{=} \PY{n}{Image}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{convergence.png}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{Embed}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}17}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.9\paperheight}}{../Introduction to Python_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \section{Some advanced topics}\label{some-advanced-topics}
+
+Here's just a brief overview of the more advanced things you can do in
+\texttt{Python}. We won't use them in class, but it's good to know about
+them.
+
+\subsection{Classes}\label{classes}
+
+\texttt{Python} can be object-oriented like \texttt{Java}. You declare
+classes as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{My_Class:}
+    \OtherTok{self}\NormalTok{.field_one}
+    \OtherTok{self}\NormalTok{.field_two}
+    
+    \KeywordTok{def} \OtherTok{__init__}\NormalTok{(args): }\CommentTok{# Equivalent to constructors in Java}
+        \CommentTok{# Initialization routine}
+        \CommentTok{# Every class needs one}
+       
+    \KeywordTok{def} \NormalTok{method_one(args):}
+        \NormalTok{[do stuff]}
+\end{Highlighting}
+\end{Shaded}
+
+Object-oriented programming favors modularity, bringing wonderful
+returns to scale. In \texttt{Python}, class fields and methods must
+always be specified with the \texttt{self} keyword, similar to
+\texttt{this} in \texttt{Java}. Unlike in \texttt{Java}, this is not
+optional in \texttt{Python}. Method overriding is also not supported in
+\texttt{Python}.
+
+\subsection{Lambda functions}\label{lambda-functions}
+
+\texttt{Python} can be functional like \texttt{Scheme}. A lambda
+function uses the following syntax:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+   \KeywordTok{lambda} \NormalTok{x: x**}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+For example, instead of including a predefined function in
+\texttt{bisection\_method}, you could use a lambda function. Lambdas and
+other household names for the functional programmer are built in, such
+as: * \texttt{map} * \texttt{filter} * \texttt{reduce}
+
+If you like Scheme, you can make \texttt{Python} as functional as you
+want.
+
+\subsection{Comprehensions}\label{comprehensions}
+
+In \texttt{Python} one important and useful tool is called list (or
+other Iterable) \emph{comprehensions}. They allow you to construct lists
+from following rules, without the amount of code overhead that you might
+see in \texttt{C} or \texttt{Java}.
+
+For example. Suppose you want to construct a list of all nonnegative
+even integers less than 20. The naive approach is to use some sort of
+loop:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evens = []}
+\KeywordTok{for} \NormalTok{i in }\DataTypeTok{range}\NormalTok{(}\DecValTok{20}\NormalTok{):}
+    \KeywordTok{if} \NormalTok{i % }\DecValTok{2} \NormalTok{== }\DecValTok{0}\NormalTok{:}
+        \NormalTok{evens.append(i)}
+\end{Highlighting}
+\end{Shaded}
+
+Comprehensions allow you to take this routine and make it more concise.
+Instead, you can write
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evens = [i }\KeywordTok{for} \NormalTok{i in }\DataTypeTok{range}\NormalTok{(}\DecValTok{20}\NormalTok{) }\KeywordTok{if} \NormalTok{i % }\DecValTok{2} \NormalTok{== }\DecValTok{0}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+For those of you who are comfortable with simple set theory, this is
+equivalent to saying
+
+\[ \textrm{Evens} = \{ i \in \mathbb{N} : i < 20, i\equiv 0 \bmod{2} \}\]
+
+Comprehensions are a great way to make your code readable and concise.
+They cost a bit more (in terms of microseconds), but often the
+philosophy of \texttt{Python} is that readable code is preferable to
+slightly-faster ugly code.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

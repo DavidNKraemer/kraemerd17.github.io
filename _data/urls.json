@@ -1,21 +1,14 @@
 [
     {
         "text": "Home",
-        "url": "/about/",
-        "icon": "fa-home",
-        "layout": "post"
-    },
-    {
-        "text": "Blog",
-        "url": "/blog/",
-        "icon": "fa-rocket"
+        "url": "/",
+        "icon": "fa-home"
     },
     {
         "text": "Courses",
         "url": "/courses/",
         "icon": "fa-institution"
     },
-
     {
         "text": "Projects",
         "url": "/projects/",
@@ -26,6 +19,11 @@
         "url": "/cv/",
         "icon": "fa-graduation-cap",
         "layout": "post"
+    },
+    {
+        "text": "Blog",
+        "url": "/blog/",
+        "icon": "fa-rocket"
     },
     {
         "text": "XML Feed",
