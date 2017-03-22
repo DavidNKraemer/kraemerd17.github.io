@@ -1,0 +1,2382 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Acquiring and wrangling with data}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    In previous sessions, we've talked about the underlying data structures
+in the \texttt{Pandas} library. We've seen how to manipulate
+\texttt{DataFrame} and \texttt{Series} objects in order to answer
+questions regarding the data. Last week, we also saw how to use
+\texttt{matplotlib} to visualize our analysis.
+
+This week we will be diving into an important topic in \texttt{Pandas}:
+aggregating and performing operations on specified groups of data
+without modifying the underlying structure. According to Wes McKinney,
+
+\begin{quote}
+Categorizing a data set and applying a function to each group, whether
+an aggregation or transformation, is often a critical component of a
+data analysis workflow. After loading, merging, and preparing a data
+set, a familiar task is to compute group statistics or possibly
+\emph{pivot tables} for reporting or visualization purposes.
+\texttt{Pandas} provides a flexible and high-performance
+\texttt{groupby} facility, enabling you to slice and dice, and summarize
+data sets in a natural way.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k+kn}{import} \PY{n}{division}
+        \PY{k+kn}{from} \PY{n+nn}{numpy.random} \PY{k+kn}{import} \PY{n}{randn}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12345}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{figure}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k+kn}{import} \PY{n}{Series}\PY{p}{,} \PY{n}{DataFrame}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+    \section{Data Aggregation and Group
+Operations}\label{data-aggregation-and-group-operations}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{notebook\PYZus{}repr\PYZus{}html} \PY{o}{=} \PY{n+nb+bp}{False}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+    \subsection{GroupBy mechanics}\label{groupby-mechanics}
+
+    \texttt{Pandas} was designed with a considerable deference to the
+progress made in data aggregation techniques by developers for the
+\texttt{R} programming language. The main mechanism is the
+\emph{split-apply-combine} paradigm:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Data is \emph{split} into groups based on one or more provided
+  \emph{keys},
+\item
+  A function is \emph{applied} to each group,
+\item
+  The results of all the function applications are \emph{combined} into
+  a result object.
+\end{enumerate}
+
+As we will see, grouping keys are very flexible in nature. Some possible
+types of keys are
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  A list or array of values sharing the length of the grouped column
+\item
+  A value indicating a column name
+\item
+  A dict or \texttt{Series} giving a correspondence between the values
+  on the axis being grouped and the group names
+\item
+  A function to be invoked on the axis index or the individual labels in
+  the index
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s}{\PYZsq{}}\PY{l+s}{data1}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s}{\PYZsq{}}\PY{l+s}{data2}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{df}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}       data1     data2 key1 key2
+        0 -0.204708  1.393406    a  one
+        1  0.478943  0.092908    a  two
+        2 -0.519439  0.281746    b  one
+        3 -0.555730  0.769023    b  two
+        4  1.965781  1.246435    a  one
+\end{Verbatim}
+        
+    We can compute the mean of the column corresponding to ``data1'' by
+using the group labels from ``key1''. This can be done in a number of
+ways, but here is a straightforward example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{grouped}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} <pandas.core.groupby.SeriesGroupBy object at 0x7f37d9157050>
+\end{Verbatim}
+        
+    Notice that \texttt{grouped} is its own \texttt{Pandas} object, just
+like a \texttt{Series} or \texttt{DataFrame}. Now we can compute simple
+statistics just like we would with other objects.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{grouped}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} key1
+        a       0.746672
+        b      -0.537585
+        Name: data1, dtype: float64
+\end{Verbatim}
+        
+    We can also pass an array of keys:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{means} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{means}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} key1  key2
+        a     one     0.880536
+              two     0.478943
+        b     one    -0.519439
+              two    -0.555730
+        Name: data1, dtype: float64
+\end{Verbatim}
+        
+    This forms a grouping using a heierarchical index, as we have seen
+earlier. To flatten the hierarchical index, as we have seen, we can call
+\texttt{unstack()}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{means}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} key2       one       two
+        key1                    
+        a     0.880536  0.478943
+        b    -0.519439 -0.555730
+\end{Verbatim}
+        
+    In these examples, the keys refer to \texttt{Series}, though they could
+really be anything so long as the lengths match up. For example,
+consider the following key arrays.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{states} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Ohio}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{California}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{California}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Ohio}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Ohio}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{years} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{]}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{states}\PY{p}{,} \PY{n}{years}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} California  2005    0.478943
+                    2006   -0.519439
+        Ohio        2005   -0.380219
+                    2006    1.965781
+        Name: data1, dtype: float64
+\end{Verbatim}
+        
+    If you're just interested in the column names, you can simply pass the
+identifying string, or list of strings, as in the following examples:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}          data1     data2
+        key1                    
+        a     0.746672  0.910916
+        b    -0.537585  0.525384
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}               data1     data2
+         key1 key2                    
+         a    one   0.880536  1.319920
+              two   0.478943  0.092908
+         b    one  -0.519439  0.281746
+              two  -0.555730  0.769023
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} key1  key2
+         a     one     2
+               two     1
+         b     one     1
+               two     1
+         dtype: int64
+\end{Verbatim}
+        
+    \subsubsection{Iterating over groups}\label{iterating-over-groups}
+
+    \texttt{groupby()} supports iteration. Specifically, \texttt{groupby()}
+produces tuples containing the group name along the relevant data. For
+example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{group} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+             \PY{k}{print}\PY{p}{(}\PY{n}{group}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a
+      data1     data2 key1 key2
+0 -0.204708  1.393406    a  one
+1  0.478943  0.092908    a  two
+4  1.965781  1.246435    a  one
+b
+      data1     data2 key1 key2
+2 -0.519439  0.281746    b  one
+3 -0.555730  0.769023    b  two
+    \end{Verbatim}
+
+    If multiple keys are being passed, you can overload the name by making a
+$n$-tuple of keys. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{for} \PY{p}{(}\PY{n}{k1}\PY{p}{,} \PY{n}{k2}\PY{p}{)}\PY{p}{,} \PY{n}{group} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{p}{(}\PY{n}{k1}\PY{p}{,} \PY{n}{k2}\PY{p}{)}\PY{p}{)}
+             \PY{k}{print}\PY{p}{(}\PY{n}{group}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+('a', 'one')
+      data1     data2 key1 key2
+0 -0.204708  1.393406    a  one
+4  1.965781  1.246435    a  one
+('a', 'two')
+      data1     data2 key1 key2
+1  0.478943  0.092908    a  two
+('b', 'one')
+      data1     data2 key1 key2
+2 -0.519439  0.281746    b  one
+('b', 'two')
+     data1     data2 key1 key2
+3 -0.55573  0.769023    b  two
+    \end{Verbatim}
+
+    This process is in general quite flexible. For example, suppose you want
+to store the relevant \texttt{DataFrame} groups as a
+native-\texttt{Python} dict. In this case, we can just wrap the
+\texttt{groupby()} call with a list and a dict, which will thus be
+stored into the dict.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{pieces} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pieces}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}       data1     data2 key1 key2
+         2 -0.519439  0.281746    b  one
+         3 -0.555730  0.769023    b  two
+\end{Verbatim}
+        
+    By default, \texttt{groupby} groups on \texttt{axis=0}, which
+corresponds to treating columns of data. Of course, you can specify
+which axis you desire.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} data1    float64
+         data2    float64
+         key1      object
+         key2      object
+         dtype: object
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{grouped}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} \{dtype('float64'):       data1     data2
+          0 -0.204708  1.393406
+          1  0.478943  0.092908
+          2 -0.519439  0.281746
+          3 -0.555730  0.769023
+          4  1.965781  1.246435, dtype('O'):   key1 key2
+          0    a  one
+          1    a  two
+          2    b  one
+          3    b  two
+          4    a  one\}
+\end{Verbatim}
+        
+    \subsubsection{Selecting a column or subset of
+columns}\label{selecting-a-column-or-subset-of-columns}
+
+    Indexing a \texttt{GroupBy} object created from a \texttt{DataFrame}
+with a column name or array of column names has the efect of
+\emph{selecting those columns} for aggregation. This means that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.groupby(}\StringTok{'key1'}\NormalTok{)[}\StringTok{'data1'}\NormalTok{]}
+\NormalTok{df.groupby(}\StringTok{'key1'}\NormalTok{)[[}\StringTok{'data2'}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+is effectively identical to
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\StringTok{'data1'}\NormalTok{].groupby(df[}\StringTok{'key1'}\NormalTok{])}
+\NormalTok{df[[}\StringTok{'data2'}\NormalTok{]].groupby(df[}\StringTok{'key1'}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+    Why is this useful? If you're working with a large dataset for which
+aggregating the entire \texttt{DataFrame} is out of the question, you
+can speed up the process by specifying the particular columns you are
+interested in.
+
+    Here's an example: we can group a \texttt{DataFrame} according to a set
+of keys, specify a particular column (in this case, \texttt{data2}), and
+take the resulting mean.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}               data2
+         key1 key2          
+         a    one   1.319920
+              two   0.092908
+         b    one   0.281746
+              two   0.769023
+\end{Verbatim}
+        
+    The object returned here is a grouped \texttt{DataFrame} if a list or
+array is passed and a grouped \texttt{Series} if just a column name is
+passed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{s\PYZus{}grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{key2}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data2}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{s\PYZus{}grouped}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <pandas.core.groupby.SeriesGroupBy object at 0x7f37d9119350>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{s\PYZus{}grouped}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} key1  key2
+         a     one     1.319920
+               two     0.092908
+         b     one     0.281746
+               two     0.769023
+         Name: data2, dtype: float64
+\end{Verbatim}
+        
+    \subsubsection{Grouping with dicts and
+Series}\label{grouping-with-dicts-and-series}
+
+    Grouping information may exist in a form other than an array. Let's
+consider another example \texttt{DataFrame}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{people} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{e}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                            \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Joe}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Steve}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Wes}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Jim}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Travis}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{people}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{,} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan} \PY{c}{\PYZsh{} Add a few NA values}
+         \PY{n}{people}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}                a         b         c         d         e
+         Joe     1.007189 -1.296221  0.274992  0.228913  1.352917
+         Steve   0.886429 -2.001637 -0.371843  1.669025 -0.438570
+         Wes    -0.539741       NaN       NaN -1.021228 -0.577087
+         Jim     0.124121  0.302614  0.523772  0.000940  1.343810
+         Travis -0.713544 -0.831154 -2.370232 -1.860761 -0.860757
+\end{Verbatim}
+        
+    Suppose we have a group correspondence for the columns and want to sum
+together the columns by group.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{mapping} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{red}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{red}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{blue}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{d}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{blue}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{e}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{red}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{f}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{orange}\PY{l+s}{\PYZsq{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    The \texttt{groupby} method can use the dict natively, allowing you to
+form \texttt{GroupBy} objects on the fly.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{by\PYZus{}column} \PY{o}{=} \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{mapping}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{by\PYZus{}column}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}             blue       red
+         Joe     0.503905  1.063885
+         Steve   1.297183 -1.553778
+         Wes    -1.021228 -1.116829
+         Jim     0.524712  1.770545
+         Travis -4.230992 -2.405455
+\end{Verbatim}
+        
+    The same holds for \texttt{Series} objects, which are structurally
+similar to dicts.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{map\PYZus{}series} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{mapping}\PY{p}{)}
+         \PY{n}{map\PYZus{}series}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} a       red
+         b       red
+         c      blue
+         d      blue
+         e       red
+         f    orange
+         dtype: object
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{map\PYZus{}series}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}         blue  red
+         Joe        2    3
+         Steve      2    3
+         Wes        1    2
+         Jim        2    3
+         Travis     2    3
+\end{Verbatim}
+        
+    \subsubsection{Grouping with functions}\label{grouping-with-functions}
+
+    In \texttt{Python}, functions are simply another data type. You can
+actually use \texttt{groupby} to isolate members of your data set
+according to a rule, defined by a function. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}           a         b         c         d         e
+         3  0.591569 -0.993608  0.798764 -0.791374  2.119639
+         5  0.886429 -2.001637 -0.371843  1.669025 -0.438570
+         6 -0.713544 -0.831154 -2.370232 -1.860761 -0.860757
+\end{Verbatim}
+        
+    You can mix and match functions with other data types that we have seen
+above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{key\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n+nb}{len}\PY{p}{,} \PY{n}{key\PYZus{}list}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:}               a         b         c         d         e
+         3 one -0.539741 -1.296221  0.274992 -1.021228 -0.577087
+           two  0.124121  0.302614  0.523772  0.000940  1.343810
+         5 one  0.886429 -2.001637 -0.371843  1.669025 -0.438570
+         6 two -0.713544 -0.831154 -2.370232 -1.860761 -0.860757
+\end{Verbatim}
+        
+    \subsubsection{Grouping by index levels}\label{grouping-by-index-levels}
+
+    Finally, you can use heierarchical indexing to perform \texttt{groupby}
+operations. To do this, pass the level number or name using the
+\texttt{level} keyword.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{columns} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{MultiIndex}\PY{o}{.}\PY{n}{from\PYZus{}arrays}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{US}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{US}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{US}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{JP}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{JP}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                                             \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{cty}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{tenor}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{hier\PYZus{}df} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{hier\PYZus{}df}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} cty          US                            JP          
+         tenor         1         3         5         1         3
+         0      0.560145 -1.265934  0.119827 -1.063512  0.332883
+         1     -2.359419 -0.199543 -1.541996 -0.970736 -1.307030
+         2      0.286350  0.377984 -0.753887  0.331286  1.349742
+         3      0.069877  0.246674 -0.011862  1.004812  1.327195
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{hier\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{cty}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} cty  JP  US
+         0     2   3
+         1     2   3
+         2     2   3
+         3     2   3
+\end{Verbatim}
+        
+    \subsection{Data aggregation}\label{data-aggregation}
+
+    Wes McKinney defines \emph{data aggregation} as any transformation that
+takes a dataset or other array and produces scalar values. For example,
+the simple statistical functions such as
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  mean
+\item
+  max
+\item
+  min
+\item
+  sum
+\end{itemize}
+
+are examples of operations taking arrays to numbers. Many of the
+aggregations that we have seen so far have been optimized for
+performance, but \texttt{Pandas} gives you the functionality to
+implement customized aggregators.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{df}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}       data1     data2 key1 key2
+         0 -0.204708  1.393406    a  one
+         1  0.478943  0.092908    a  two
+         2 -0.519439  0.281746    b  one
+         3 -0.555730  0.769023    b  two
+         4  1.965781  1.246435    a  one
+\end{Verbatim}
+        
+    For example, we can use \texttt{quantile(x)} (not explicitly implemented
+for \texttt{GroupBy}), which determines the value of $x$th percentile
+given a \texttt{Series} of data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{grouped}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.9}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} key1
+         a       1.668413
+         b      -0.523068
+         Name: data1, dtype: float64
+\end{Verbatim}
+        
+    More to the point, you can define your own functions and do
+\texttt{groupby} operations with them. For example, if you are
+interested in the range of your data sets, you can use:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{def} \PY{n+nf}{peak\PYZus{}to\PYZus{}peak}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{arr}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{arr}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+         \PY{n}{grouped}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{peak\PYZus{}to\PYZus{}peak}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}          data1     data2
+         key1                    
+         a     2.170488  1.300498
+         b     0.036292  0.487276
+\end{Verbatim}
+        
+    Even method that aren't really aggregations, such as \texttt{describe},
+still perform useful operations on \texttt{GroupBy} objects.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{grouped}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}                data1     data2
+         key1                          
+         a    count  3.000000  3.000000
+              mean   0.746672  0.910916
+              std    1.109736  0.712217
+              min   -0.204708  0.092908
+              25\%    0.137118  0.669671
+              50\%    0.478943  1.246435
+              75\%    1.222362  1.319920
+              max    1.965781  1.393406
+         b    count  2.000000  2.000000
+              mean  -0.537585  0.525384
+              std    0.025662  0.344556
+              min   -0.555730  0.281746
+              25\%   -0.546657  0.403565
+              50\%   -0.537585  0.525384
+              75\%   -0.528512  0.647203
+              max   -0.519439  0.769023
+\end{Verbatim}
+        
+    We will continue with the \texttt{tips} dataset from previous weeks to
+show off some of the more advanced features of aggregation. The data set
+can be found on the course webpage, or
+\href{http://www.math.grinnell.edu/~kraemerd17/courses/python/course-material/tips.csv}{here},
+if you're lazy (like us).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{tips} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{tips.csv}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{c}{\PYZsh{} Add tip percentage of total bill}
+         \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{total\PYZus{}bill}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{tips}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}    total\_bill   tip     sex smoker  day    time  size   tip\_pct
+         0       16.99  1.01  Female     No  Sun  Dinner     2  0.059447
+         1       10.34  1.66    Male     No  Sun  Dinner     3  0.160542
+         2       21.01  3.50    Male     No  Sun  Dinner     3  0.166587
+         3       23.68  3.31    Male     No  Sun  Dinner     2  0.139780
+         4       24.59  3.61  Female     No  Sun  Dinner     4  0.146808
+         5       25.29  4.71    Male     No  Sun  Dinner     4  0.186240
+\end{Verbatim}
+        
+    \subsubsection{Column-wise and multiple function
+application}\label{column-wise-and-multiple-function-application}
+
+    As we've seen, aggregating a \texttt{Series} or all of the columns of a
+\texttt{DataFrame} is a matter of using \texttt{aggregate} with the
+desired function or calling a method like \texttt{mean} or \texttt{std}.
+However, you may want to aggregate using a different function depending
+on the column or multiple functions at once. Fotunately, this is
+straightforward to do, which we will illustrate through a number of
+examples. First, let's group the tips by \texttt{sex} and
+\texttt{smoker}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{tips}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    Descriptive statistics, such as \texttt{mean}, can be passed to the
+aggregator as a string.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{grouped\PYZus{}pct} \PY{o}{=} \PY{n}{grouped}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{grouped\PYZus{}pct}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} sex     smoker
+         Female  No        0.156921
+                 Yes       0.182150
+         Male    No        0.160669
+                 Yes       0.152771
+         Name: tip\_pct, dtype: float64
+\end{Verbatim}
+        
+    You can also pass a list of functions to do aggregation. If the function
+is built-in, it passes as a string. Otherwise, one can simply pass the
+function on its own.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{grouped\PYZus{}pct}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{std}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{peak\PYZus{}to\PYZus{}peak}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}                    mean       std  peak\_to\_peak
+         sex    smoker                                  
+         Female No      0.156921  0.036421      0.195876
+                Yes     0.182150  0.071595      0.360233
+         Male   No      0.160669  0.041849      0.220186
+                Yes     0.152771  0.090588      0.674707
+\end{Verbatim}
+        
+    To label the columns assigned by \texttt{agg}, pass a tuple in for each
+function, with the first element corresponding to the label of the
+column.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{grouped\PYZus{}pct}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{foo}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}                     foo       bar
+         sex    smoker                    
+         Female No      0.156921  0.036421
+                Yes     0.182150  0.071595
+         Male   No      0.160669  0.041849
+                Yes     0.152771  0.090588
+\end{Verbatim}
+        
+    With a \texttt{DataFame} you have more options as you can specify as
+list of functions to apply to all of the columns or different functions
+per column.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{functions} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{count}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{max}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{result} \PY{o}{=} \PY{n}{grouped}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{total\PYZus{}bill}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{functions}\PY{p}{)}
+         \PY{n}{result}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:}               tip\_pct                     total\_bill                  
+                         count      mean       max      count       mean    max
+         sex    smoker                                                         
+         Female No          54  0.156921  0.252672         54  18.105185  35.83
+                Yes         33  0.182150  0.416667         33  17.977879  44.30
+         Male   No          97  0.160669  0.291990         97  19.791237  48.33
+                Yes         60  0.152771  0.710345         60  22.284500  50.81
+\end{Verbatim}
+        
+    Here we are using what effectively amounts to a hierarchical index,
+which we can then slice by choosing columns and subcolumns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{result}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}                count      mean       max
+         sex    smoker                           
+         Female No         54  0.156921  0.252672
+                Yes        33  0.182150  0.416667
+         Male   No         97  0.160669  0.291990
+                Yes        60  0.152771  0.710345
+\end{Verbatim}
+        
+    As above, a list of tuples with custom names can be passed:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{ftuples} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Durchschnitt}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Abweichung}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{)}\PY{p}{]}
+         \PY{n}{grouped}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{total\PYZus{}bill}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{ftuples}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:}                    tip\_pct              total\_bill           
+                       Durchschnitt Abweichung Durchschnitt Abweichung
+         sex    smoker                                                
+         Female No         0.156921   0.001327    18.105185  53.092422
+                Yes        0.182150   0.005126    17.977879  84.451517
+         Male   No         0.160669   0.001751    19.791237  76.152961
+                Yes        0.152771   0.008206    22.284500  98.244673
+\end{Verbatim}
+        
+    You can also specify the particular column of a \texttt{DataFrame} that
+you want to do aggregation on by passing a dict of information. For
+example,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{grouped}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{size}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{sum}\PY{l+s}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}                 tip  size
+         sex    smoker            
+         Female No       5.2   140
+                Yes      6.5    74
+         Male   No       9.0   263
+                Yes     10.0   150
+\end{Verbatim}
+        
+    You can overload a particular column's aggregator functions by making
+the dict key corresponding to the column reference a list rather than
+just one function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{grouped}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{min}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{max}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{std}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                      \PY{l+s}{\PYZsq{}}\PY{l+s}{size}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{sum}\PY{l+s}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}                 tip\_pct                               size
+                             min       max      mean       std  sum
+         sex    smoker                                             
+         Female No      0.056797  0.252672  0.156921  0.036421  140
+                Yes     0.056433  0.416667  0.182150  0.071595   74
+         Male   No      0.071804  0.291990  0.160669  0.041849  263
+                Yes     0.035638  0.710345  0.152771  0.090588  150
+\end{Verbatim}
+        
+    \subsubsection{Returning aggregated data in ``unindexed''
+form}\label{returning-aggregated-data-in-unindexed-form}
+
+    Of course, you can unindex a hierarchical indexed \texttt{GroupBy}
+object by Specifying the \texttt{as\_index} optional paramter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{as\PYZus{}index}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:}       sex smoker  total\_bill       tip      size   tip\_pct
+         0  Female     No   18.105185  2.773519  2.592593  0.156921
+         1  Female    Yes   17.977879  2.931515  2.242424  0.182150
+         2    Male     No   19.791237  3.113402  2.711340  0.160669
+         3    Male    Yes   22.284500  3.051167  2.500000  0.152771
+\end{Verbatim}
+        
+    \subsection{Group-wise operations and
+transformations}\label{group-wise-operations-and-transformations}
+
+    Aggregation is but one kind of group operation. It is a special case of
+more general data transformations, taking one-dimensional arrays and
+reducing them to scalars. Here we will generalize this notion by showing
+you how to use \texttt{apply} and \texttt{transform} methods on
+\texttt{DataFrame} objects. Let's revisit our old \texttt{DataFrame} of
+random data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{df}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}       data1     data2 key1 key2
+         0 -0.204708  1.393406    a  one
+         1  0.478943  0.092908    a  two
+         2 -0.519439  0.281746    b  one
+         3 -0.555730  0.769023    b  two
+         4  1.965781  1.246435    a  one
+\end{Verbatim}
+        
+    Suppose we want to add a column containing group means for each index.
+One way to do this is to aggregate, then merge:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{k1\PYZus{}means} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}prefix}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{mean\PYZus{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{k1\PYZus{}means}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:}       mean\_data1  mean\_data2
+         key1                        
+         a       0.746672    0.910916
+         b      -0.537585    0.525384
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{k1\PYZus{}means}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{key1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}index}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:}       data1     data2 key1 key2  mean\_data1  mean\_data2
+         0 -0.204708  1.393406    a  one    0.746672    0.910916
+         1  0.478943  0.092908    a  two    0.746672    0.910916
+         4  1.965781  1.246435    a  one    0.746672    0.910916
+         2 -0.519439  0.281746    b  one   -0.537585    0.525384
+         3 -0.555730  0.769023    b  two   -0.537585    0.525384
+\end{Verbatim}
+        
+    This works but is somewhat inflexible. You can think of the operation as
+transforming the two data columns using the \texttt{np.mean} function.
+Returning to the \texttt{people DataFrame} from before, we can use the
+\texttt{transform} method on \texttt{GroupBy}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{key} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:}             a         b         c         d         e
+         one -0.082032 -1.063687 -1.047620 -0.884358 -0.028309
+         two  0.505275 -0.849512  0.075965  0.834983  0.452620
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:}                a         b         c         d         e
+         Joe    -0.082032 -1.063687 -1.047620 -0.884358 -0.028309
+         Steve   0.505275 -0.849512  0.075965  0.834983  0.452620
+         Wes    -0.082032 -1.063687 -1.047620 -0.884358 -0.028309
+         Jim     0.505275 -0.849512  0.075965  0.834983  0.452620
+         Travis -0.082032 -1.063687 -1.047620 -0.884358 -0.028309
+\end{Verbatim}
+        
+    What is going on here is that \texttt{transform} applies a function to
+each group, then places the results in the appropriate locations. When
+this reduces to the special case of scalar values, the answer is simply
+broadcasted across all the relevant locations.
+
+    Suppose instead you wanted to subtract the mean value from each group.
+To do so, let's define a function \texttt{demean}, and proceed by
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{def} \PY{n+nf}{demean}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{arr} \PY{o}{\PYZhy{}} \PY{n}{arr}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{demeaned} \PY{o}{=} \PY{n}{people}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{demean}\PY{p}{)}
+         \PY{n}{demeaned}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:}                a         b         c         d         e
+         Joe     1.089221 -0.232534  1.322612  1.113271  1.381226
+         Steve   0.381154 -1.152125 -0.447807  0.834043 -0.891190
+         Wes    -0.457709       NaN       NaN -0.136869 -0.548778
+         Jim    -0.381154  1.152125  0.447807 -0.834043  0.891190
+         Travis -0.631512  0.232534 -1.322612 -0.976402 -0.832448
+\end{Verbatim}
+        
+    You can check that \texttt{demeanded} now has zero group means:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{demeaned}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:}                 a             b  c             d  e
+         one  0.000000e+00 -1.110223e-16  0  7.401487e-17  0
+         two -2.775558e-17  0.000000e+00  0  0.000000e+00  0
+\end{Verbatim}
+        
+    We will soon see that demeaning can be achieved using \texttt{apply} as
+well.
+
+    \subsubsection{Apply: General
+split-apply-combine}\label{apply-general-split-apply-combine}
+
+    There are three data transformation tools that we can use to build
+analyses on our data. The first two, \texttt{aggregate} and
+\texttt{transform}, are somewhat rigid in their capabilities. On the
+flip side, this makes it easier on you the data analyst to perform data
+transformations. The third tool is \texttt{apply}, which gives you
+immense flexibility at the expense of intuitivity.
+
+    Returning to the \texttt{tips.csv} data set, suppose we want to select
+the top five \texttt{tip\_pct} values by group. We can write a function
+to identify the top values of a \texttt{DataFrame} very easily:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{top}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{column}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{n}{column}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{:}\PY{p}{]}
+         \PY{n}{top}\PY{p}{(}\PY{n}{tips}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:}      total\_bill   tip     sex smoker  day    time  size   tip\_pct
+         109       14.31  4.00  Female    Yes  Sat  Dinner     2  0.279525
+         183       23.17  6.50    Male    Yes  Sun  Dinner     4  0.280535
+         232       11.61  3.39    Male     No  Sat  Dinner     2  0.291990
+         67         3.07  1.00  Female    Yes  Sat  Dinner     1  0.325733
+         178        9.60  4.00  Female    Yes  Sun  Dinner     2  0.416667
+         172        7.25  5.15    Male    Yes  Sun  Dinner     2  0.710345
+\end{Verbatim}
+        
+    Now if we group by \texttt{smoker}, say, and call \texttt{apply} with
+this function, we get
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{top}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:}             total\_bill   tip     sex smoker   day    time  size   tip\_pct
+         smoker                                                                   
+         No     88        24.71  5.85    Male     No  Thur   Lunch     2  0.236746
+                185       20.69  5.00    Male     No   Sun  Dinner     5  0.241663
+                51        10.29  2.60  Female     No   Sun  Dinner     2  0.252672
+                149        7.51  2.00    Male     No  Thur   Lunch     2  0.266312
+                232       11.61  3.39    Male     No   Sat  Dinner     2  0.291990
+         Yes    109       14.31  4.00  Female    Yes   Sat  Dinner     2  0.279525
+                183       23.17  6.50    Male    Yes   Sun  Dinner     4  0.280535
+                67         3.07  1.00  Female    Yes   Sat  Dinner     1  0.325733
+                178        9.60  4.00  Female    Yes   Sun  Dinner     2  0.416667
+                172        7.25  5.15    Male    Yes   Sun  Dinner     2  0.710345
+\end{Verbatim}
+        
+    \texttt{top} is called on each piece of the \texttt{DataFrame}, then the
+results are glued together using \texttt{pandas.concat}, labeling the
+pieces with the group names.
+
+If you pass a function to \texttt{apply} that takes other arguments or
+keywords, you can pass these after the function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{day}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{top}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{column}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{total\PYZus{}bill}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}                  total\_bill    tip     sex smoker   day    time  size  \textbackslash{}
+         smoker day                                                              
+         No     Fri  94        22.75   3.25  Female     No   Fri  Dinner     2   
+                Sat  212       48.33   9.00    Male     No   Sat  Dinner     4   
+                Sun  156       48.17   5.00    Male     No   Sun  Dinner     6   
+                Thur 142       41.19   5.00    Male     No  Thur   Lunch     5   
+         Yes    Fri  95        40.17   4.73    Male    Yes   Fri  Dinner     4   
+                Sat  170       50.81  10.00    Male    Yes   Sat  Dinner     3   
+                Sun  182       45.35   3.50    Male    Yes   Sun  Dinner     3   
+                Thur 197       43.11   5.00  Female    Yes  Thur   Lunch     4   
+         
+                           tip\_pct  
+         smoker day                 
+         No     Fri  94   0.142857  
+                Sat  212  0.186220  
+                Sun  156  0.103799  
+                Thur 142  0.121389  
+         Yes    Fri  95   0.117750  
+                Sat  170  0.196812  
+                Sun  182  0.077178  
+                Thur 197  0.115982  
+\end{Verbatim}
+        
+    Recall that \texttt{describe} seems to work okay on a \texttt{GroupBy}
+object.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{result} \PY{o}{=} \PY{n}{tips}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+         \PY{n}{result}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} smoker       
+         No      count    151.000000
+                 mean       0.159328
+                 std        0.039910
+                 min        0.056797
+                 25\%        0.136906
+                 50\%        0.155625
+                 75\%        0.185014
+                 max        0.291990
+         Yes     count     93.000000
+                 mean       0.163196
+                 std        0.085119
+                 min        0.035638
+                 25\%        0.106771
+                 50\%        0.153846
+                 75\%        0.195059
+                 max        0.710345
+         dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{result}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} smoker          No        Yes
+         count   151.000000  93.000000
+         mean      0.159328   0.163196
+         std       0.039910   0.085119
+         min       0.056797   0.035638
+         25\%       0.136906   0.106771
+         50\%       0.155625   0.153846
+         75\%       0.185014   0.195059
+         max       0.291990   0.710345
+\end{Verbatim}
+        
+    What's really happening (for all you 151ers) is that when you invoke a
+method like \texttt{describe}, it is actually just a shortcut for:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f = }\KeywordTok{lambda} \NormalTok{x: x.describe()}
+\NormalTok{grouped.}\DataTypeTok{apply}\NormalTok{(f)}
+\end{Highlighting}
+\end{Shaded}
+
+    \paragraph{Suppressing the group keys}\label{suppressing-the-group-keys}
+
+    One point of style: if you prefer not working with hierarchical indices,
+you can specify in the \texttt{groupby} call to treat the underlying
+\texttt{DataFrame} as flat by choosing \texttt{group\_keys=False}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{group\PYZus{}keys}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{top}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:}      total\_bill   tip     sex smoker   day    time  size   tip\_pct
+         88        24.71  5.85    Male     No  Thur   Lunch     2  0.236746
+         185       20.69  5.00    Male     No   Sun  Dinner     5  0.241663
+         51        10.29  2.60  Female     No   Sun  Dinner     2  0.252672
+         149        7.51  2.00    Male     No  Thur   Lunch     2  0.266312
+         232       11.61  3.39    Male     No   Sat  Dinner     2  0.291990
+         109       14.31  4.00  Female    Yes   Sat  Dinner     2  0.279525
+         183       23.17  6.50    Male    Yes   Sun  Dinner     4  0.280535
+         67         3.07  1.00  Female    Yes   Sat  Dinner     1  0.325733
+         178        9.60  4.00  Female    Yes   Sun  Dinner     2  0.416667
+         172        7.25  5.15    Male    Yes   Sun  Dinner     2  0.710345
+\end{Verbatim}
+        
+    \subsubsection{Example: Filling missing values with group-specific
+values}\label{example-filling-missing-values-with-group-specific-values}
+
+    When cleaning up missing data, in some cases you will filter out data
+observations using \texttt{dropna}, but in others you may want to impute
+(fill in) the NA values using a fixed value or some value derived from
+the data. \texttt{fillna} is the right tool to use; for example, we can
+fill in NA values with the mean:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{s} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{s}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+         \PY{n}{s}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} 0         NaN
+         1   -1.549106
+         2         NaN
+         3    0.758363
+         4         NaN
+         5    0.862580
+         dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{s}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} 0    0.023946
+         1   -1.549106
+         2    0.023946
+         3    0.758363
+         4    0.023946
+         5    0.862580
+         dtype: float64
+\end{Verbatim}
+        
+    Suppose you need the fill value to vary by group. As you may guess, you
+need only group the data and use \texttt{apply} with a function that
+calls \texttt{fillna} on each data chunk. Here is some sample data on
+some US states divided into eastern and western states.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{states} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Ohio}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{New York}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Vermont}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Florida}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s}{\PYZsq{}}\PY{l+s}{Oregon}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Nevada}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{California}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Idaho}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{group\PYZus{}key} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{East}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{4} \PY{o}{+} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{West}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{4}
+         \PY{n}{data} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{states}\PY{p}{)}
+         \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Vermont}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Nevada}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Idaho}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+         \PY{n}{data}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} Ohio         -0.010032
+         New York      0.050009
+         Vermont            NaN
+         Florida       0.852965
+         Oregon       -0.955869
+         Nevada             NaN
+         California   -2.304234
+         Idaho              NaN
+         dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{group\PYZus{}key}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} East    0.297647
+         West   -1.630051
+         dtype: float64
+\end{Verbatim}
+        
+    We can fill the NA values using the group means:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{fill\PYZus{}mean} \PY{o}{=} \PY{k}{lambda} \PY{n}{g}\PY{p}{:} \PY{n}{g}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{g}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{group\PYZus{}key}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{fill\PYZus{}mean}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} Ohio         -0.010032
+         New York      0.050009
+         Vermont       0.297647
+         Florida       0.852965
+         Oregon       -0.955869
+         Nevada       -1.630051
+         California   -2.304234
+         Idaho        -1.630051
+         dtype: float64
+\end{Verbatim}
+        
+    In another case, you might have pre-defined fill values in your code
+that vary by group. Since the groups have a \texttt{name} attribute set,
+internally, we can use that:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{fill\PYZus{}values} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{East}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{West}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}
+         \PY{n}{fill\PYZus{}func} \PY{o}{=} \PY{k}{lambda} \PY{n}{g}\PY{p}{:} \PY{n}{g}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{fill\PYZus{}values}\PY{p}{[}\PY{n}{g}\PY{o}{.}\PY{n}{name}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{group\PYZus{}key}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{fill\PYZus{}func}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} Ohio         -0.010032
+         New York      0.050009
+         Vermont       0.500000
+         Florida       0.852965
+         Oregon       -0.955869
+         Nevada       -1.000000
+         California   -2.304234
+         Idaho        -1.000000
+         dtype: float64
+\end{Verbatim}
+        
+    \subsubsection{Example: Random sampling and
+permutation}\label{example-random-sampling-and-permutation}
+
+    Suppose you wanted to draw a random sample from a large dataset for
+Monte Carlo simulation purposes or some other application. There are a
+number of ways to perform the ``draws''; some are much more efficient
+than others. One way is to select the first \texttt{K} elements of
+\texttt{np.random.permutation(N)}, where \texttt{N} is the size of your
+complete dataset and \texttt{K} the desired sample size. As a more fun
+example, here's a way to construct a deck of English-style playing
+cards:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c}{\PYZsh{} Hearts, Spades, Clubs, Diamonds}
+         \PY{n}{suits} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{H}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{C}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{D}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{card\PYZus{}val} \PY{o}{=} \PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)} \PY{o}{+} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{4}
+         \PY{n}{base\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)} \PY{o}{+} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{J}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Q}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{cards} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{suit} \PY{o+ow}{in} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{H}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{C}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{D}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{cards}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{num}\PY{p}{)} \PY{o}{+} \PY{n}{suit} \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n}{base\PYZus{}names}\PY{p}{)}
+         
+         \PY{n}{deck} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{card\PYZus{}val}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{cards}\PY{p}{)}
+\end{Verbatim}
+
+    So now we have a \texttt{Series} of length 52 whose index contains card
+names and values are the ones used in blackjack and other games (to keep
+things simple, I just let the ace be 1).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{deck}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{13}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} AH      1
+         2H      2
+         3H      3
+         4H      4
+         5H      5
+         6H      6
+         7H      7
+         8H      8
+         9H      9
+         10H    10
+         JH     10
+         KH     10
+         QH     10
+         dtype: int64
+\end{Verbatim}
+        
+    Now, based on what we've just discussed, drawing a hand of five cards
+from the desk could be written as:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{k}{def} \PY{n+nf}{draw}\PY{p}{(}\PY{n}{deck}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{deck}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{deck}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}\PY{p}{)}
+         \PY{n}{draw}\PY{p}{(}\PY{n}{deck}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} QC    10
+         4H     4
+         KC    10
+         5H     5
+         8C     8
+         dtype: int64
+\end{Verbatim}
+        
+    Suppose you wnted two random cards from each suit. Because the suit is
+the last character of each card name, we can group based on this and use
+\texttt{apply}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{get\PYZus{}suit} \PY{o}{=} \PY{k}{lambda} \PY{n}{card}\PY{p}{:} \PY{n}{card}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{c}{\PYZsh{} last letter is suit}
+         \PY{n}{deck}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{get\PYZus{}suit}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{draw}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} C  8C      8
+            9C      9
+         D  KD     10
+            6D      6
+         H  10H    10
+            7H      7
+         S  3S      3
+            4S      4
+         dtype: int64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c}{\PYZsh{} alternatively}
+         \PY{n}{deck}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{get\PYZus{}suit}\PY{p}{,} \PY{n}{group\PYZus{}keys}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{draw}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} 4C      4
+         10C    10
+         AD      1
+         4D      4
+         JH     10
+         7H      7
+         KS     10
+         AS      1
+         dtype: int64
+\end{Verbatim}
+        
+    \subsubsection{Example: Group weighted average and
+correlation}\label{example-group-weighted-average-and-correlation}
+
+    Under the split-apply-combine paradigm of \texttt{groupby} operations
+between columns in a \texttt{DataFrame} or two \texttt{Series}, such as
+group weighted average, become a routine affair. As an example, take
+this dataset containing group keys, values, and some weights:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{df} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{category}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                         \PY{l+s}{\PYZsq{}}\PY{l+s}{data}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}
+                         \PY{l+s}{\PYZsq{}}\PY{l+s}{weights}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{df}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:}   category      data   weights
+         0        a -1.218302  0.832619
+         1        a -0.733233  0.371132
+         2        a -0.851944  0.040553
+         3        a -1.623093  0.554671
+         4        b -0.279937  0.451246
+         5        b  1.155034  0.725301
+         6        b  0.227328  0.378451
+         7        b -1.095511  0.840662
+\end{Verbatim}
+        
+    The group weighted average by category would then be:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{category}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{get\PYZus{}wavg} \PY{o}{=} \PY{k}{lambda} \PY{n}{g}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{data}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{n}{g}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{weights}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{grouped}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}wavg}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} category
+         a          -1.23478
+         b          -0.05155
+         dtype: float64
+\end{Verbatim}
+        
+    As a less trivial example, consider a data set from Yahoo! Finance
+containing end of day prices for a few stocks and the S\&P 500 index
+(the \texttt{SPX} ticker):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{close\PYZus{}px} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{stock\PYZus{}px.csv}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{close\PYZus{}px}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 2214 entries, 2003-01-02 00:00:00 to 2011-10-14 00:00:00
+Data columns (total 4 columns):
+AAPL    2214 non-null float64
+MSFT    2214 non-null float64
+XOM     2214 non-null float64
+SPX     2214 non-null float64
+dtypes: float64(4)
+memory usage: 86.5 KB
+    \end{Verbatim}
+
+    One task of interest might be to compute a \texttt{DataFrame} consisting
+of the yearly correlations of daily returns (computed from percent
+changes) with \texttt{SPX}. Here is one way to do it:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{close\PYZus{}px}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:}               AAPL   MSFT    XOM      SPX
+         2011-10-11  400.29  27.00  76.27  1195.54
+         2011-10-12  402.19  26.96  77.16  1207.25
+         2011-10-13  408.43  27.18  76.37  1203.66
+         2011-10-14  422.00  27.27  78.11  1224.58
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{rets} \PY{o}{=} \PY{n}{close\PYZus{}px}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         \PY{n}{spx\PYZus{}corr} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{corrwith}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{SPX}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{by\PYZus{}year} \PY{o}{=} \PY{n}{rets}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{year}\PY{p}{)}
+         \PY{n}{by\PYZus{}year}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{spx\PYZus{}corr}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:}           AAPL      MSFT       XOM  SPX
+         2003  0.541124  0.745174  0.661265    1
+         2004  0.374283  0.588531  0.557742    1
+         2005  0.467540  0.562374  0.631010    1
+         2006  0.428267  0.406126  0.518514    1
+         2007  0.508118  0.658770  0.786264    1
+         2008  0.681434  0.804626  0.828303    1
+         2009  0.707103  0.654902  0.797921    1
+         2010  0.710105  0.730118  0.839057    1
+         2011  0.691931  0.800996  0.859975    1
+\end{Verbatim}
+        
+    There is of course nothing to stop you from computing inter-column
+correlation:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c}{\PYZsh{} Annual correlation of Apple with Microsoft}
+         \PY{n}{by\PYZus{}year}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{g}\PY{p}{:} \PY{n}{g}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{AAPL}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{g}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{MSFT}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:} 2003    0.480868
+         2004    0.259024
+         2005    0.300093
+         2006    0.161735
+         2007    0.417738
+         2008    0.611901
+         2009    0.432738
+         2010    0.571946
+         2011    0.581987
+         dtype: float64
+\end{Verbatim}
+        
+    \subsection{Pivot tables and
+Cross-tabulation}\label{pivot-tables-and-cross-tabulation}
+
+    A \emph{pivot table} is a data summerization tool. Pivot tables work by
+aggregating a table of data by keys, where the data is organized
+rectangularly with the group keys along the rows and columns. We can use
+pivot tables in Python by using the \texttt{groupby} methodology. Using
+DataFrames allows us to apply the \texttt{pivot\_table} method and we
+can use the \texttt{pandas.pivot\_table} function. Besides acting as a
+great way to access \texttt{groupby}, \texttt{pivot\_table} can add
+partial totals or margins.
+
+We can use the \texttt{pivot\_table} to calculate the group means of
+people by \texttt{sex} and \texttt{smoker}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{tips}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{tips.csv}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{total\PYZus{}bill}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{tips}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}74}]:}                    size       tip   tip\_pct  total\_bill
+         sex    smoker                                          
+         Female No      2.592593  2.773519  0.156921   18.105185
+                Yes     2.242424  2.931515  0.182150   17.977879
+         Male   No      2.711340  3.113402  0.160669   19.791237
+                Yes     2.500000  3.051167  0.152771   22.284500
+\end{Verbatim}
+        
+    Suppose that now we only care about tip percentage, size of the group,
+and day of the week. We can put \texttt{smoker} in the columns and
+\texttt{day} in the rows, so that we yield a tables showing the group
+averages of \texttt{tip\_pct} and \texttt{size} based on \texttt{smoker}
+and \texttt{day}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{size}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{day}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                          \PY{n}{columns}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:}               tip\_pct                size          
+         smoker             No       Yes        No       Yes
+         sex    day                                         
+         Female Fri   0.165296  0.209129  2.500000  2.000000
+                Sat   0.147993  0.163817  2.307692  2.200000
+                Sun   0.165710  0.237075  3.071429  2.500000
+                Thur  0.155971  0.163073  2.480000  2.428571
+         Male   Fri   0.138005  0.144730  2.000000  2.125000
+                Sat   0.162132  0.139067  2.656250  2.629630
+                Sun   0.158291  0.173964  2.883721  2.600000
+                Thur  0.165706  0.164417  2.500000  2.300000
+\end{Verbatim}
+        
+    Furthermore, if we also want data about general tipping percentages and
+size of parties without regard to people smoking, we can use the
+\texttt{margins} argument to calculate to corresponding group statistic.
+Using \texttt{margins=True} calculates the partial totals of each
+column.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{size}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{day}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                          \PY{n}{columns}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{margins}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:}               tip\_pct                          size                    
+         smoker             No       Yes       All        No       Yes       All
+         sex    day                                                             
+         Female Fri   0.165296  0.209129  0.199388  2.500000  2.000000  2.111111
+                Sat   0.147993  0.163817  0.156470  2.307692  2.200000  2.250000
+                Sun   0.165710  0.237075  0.181569  3.071429  2.500000  2.944444
+                Thur  0.155971  0.163073  0.157525  2.480000  2.428571  2.468750
+         Male   Fri   0.138005  0.144730  0.143385  2.000000  2.125000  2.100000
+                Sat   0.162132  0.139067  0.151577  2.656250  2.629630  2.644068
+                Sun   0.158291  0.173964  0.162344  2.883721  2.600000  2.810345
+                Thur  0.165706  0.164417  0.165276  2.500000  2.300000  2.433333
+         All          0.159328  0.163196  0.160803  2.668874  2.408602  2.569672
+\end{Verbatim}
+        
+    The \texttt{All} columns show the average tipping percentage and size of
+parties without regard to smoking. To use a different aggregate
+function, we may use the \texttt{aggfunc} argument. For example we may
+use the \texttt{len} function to calculate the frequency of group sizes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{day}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{aggfunc}\PY{o}{=}\PY{n+nb}{len}\PY{p}{,} \PY{n}{margins}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}77}]:} day            Fri  Sat  Sun  Thur  All
+         sex    smoker                          
+         Female No        2   13   14    25   54
+                Yes       7   15    4     7   33
+         Male   No        2   32   43    20   97
+                Yes       8   27   15    10   60
+         All             19   87   76    62  244
+\end{Verbatim}
+        
+    To replace empty values with zero, we can use the \texttt{fill\_value}
+argument.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{size}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{time}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sex}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{smoker}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                          \PY{n}{columns}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{day}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{aggfunc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{sum}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:} day                   Fri  Sat  Sun  Thur
+         time   sex    smoker                     
+         Dinner Female No        2   30   43     2
+                       Yes       8   33   10     0
+                Male   No        4   85  124     0
+                       Yes      12   71   39     0
+         Lunch  Female No        3    0    0    60
+                       Yes       6    0    0    17
+                Male   No        0    0    0    50
+                       Yes       5    0    0    23
+\end{Verbatim}
+        
+    \subsubsection{Cross-tabulations:
+crosstab}\label{cross-tabulations-crosstab}
+
+    A \emph{cross-tabulation} is a special case of a pivot table that
+computes group frequencies.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{k+kn}{from} \PY{n+nn}{StringIO} \PY{k+kn}{import} \PY{n}{StringIO}
+         \PY{n}{data} \PY{o}{=} \PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s}{Sample    Gender    Handedness}
+         \PY{l+s}{1    Female    Right\PYZhy{}handed}
+         \PY{l+s}{2    Male    Left\PYZhy{}handed}
+         \PY{l+s}{3    Female    Right\PYZhy{}handed}
+         \PY{l+s}{4    Male    Right\PYZhy{}handed}
+         \PY{l+s}{5    Male    Left\PYZhy{}handed}
+         \PY{l+s}{6    Male    Right\PYZhy{}handed}
+         \PY{l+s}{7    Female    Right\PYZhy{}handed}
+         \PY{l+s}{8    Female    Left\PYZhy{}handed}
+         \PY{l+s}{9    Male    Right\PYZhy{}handed}
+         \PY{l+s}{10    Female    Right\PYZhy{}handed}\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}table}\PY{p}{(}\PY{n}{StringIO}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{s+}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{data}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:}    Sample  Gender    Handedness
+         0       1  Female  Right-handed
+         1       2    Male   Left-handed
+         2       3  Female  Right-handed
+         3       4    Male  Right-handed
+         4       5    Male   Left-handed
+         5       6    Male  Right-handed
+         6       7  Female  Right-handed
+         7       8  Female   Left-handed
+         8       9    Male  Right-handed
+         9      10  Female  Right-handed
+\end{Verbatim}
+        
+    We could use \texttt{pivot\_table} to do this calculation, but
+\texttt{pandas.crosstab} is a convenient.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{Gender}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{Handedness}\PY{p}{,} \PY{n}{margins}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:} Handedness  Left-handed  Right-handed  All
+         Gender                                    
+         Female                1             4    5
+         Male                  2             3    5
+         All                   3             7   10
+\end{Verbatim}
+        
+    When using \texttt{crosstab}, we may use either an array or Series or a
+list of arrays.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{p}{[}\PY{n}{tips}\PY{o}{.}\PY{n}{time}\PY{p}{,} \PY{n}{tips}\PY{o}{.}\PY{n}{day}\PY{p}{]}\PY{p}{,} \PY{n}{tips}\PY{o}{.}\PY{n}{smoker}\PY{p}{,} \PY{n}{margins}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} smoker        No  Yes  All
+         time   day                
+         Dinner Fri     3    9   12
+                Sat    45   42   87
+                Sun    57   19   76
+                Thur    1    0    1
+         Lunch  Fri     1    6    7
+                Thur   44   17   61
+         All          151   93  244
+\end{Verbatim}
+        
+    \subsection{Example: 2012 Federal Election Commission
+Database}\label{example-2012-federal-election-commission-database}
+
+    We will be working with data from the 2012 US Presidential Election.
+This dataset focuses on campaign contributions for presidential
+candidates. The data can be loaded from:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{fec} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{P00000001\PYZhy{}ALL.csv}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{fec}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 1001731 entries, 0 to 1001730
+Data columns (total 16 columns):
+cmte\_id              1001731 non-null object
+cand\_id              1001731 non-null object
+cand\_nm              1001731 non-null object
+contbr\_nm            1001731 non-null object
+contbr\_city          1001712 non-null object
+contbr\_st            1001727 non-null object
+contbr\_zip           1001620 non-null object
+contbr\_employer      988002 non-null object
+contbr\_occupation    993301 non-null object
+contb\_receipt\_amt    1001731 non-null float64
+contb\_receipt\_dt     1001731 non-null object
+receipt\_desc         14166 non-null object
+memo\_cd              92482 non-null object
+memo\_text            97770 non-null object
+form\_tp              1001731 non-null object
+file\_num             1001731 non-null int64
+dtypes: float64(1), int64(1), object(14)
+memory usage: 129.9+ MB
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/alethiometryst/anaconda/lib/python2.7/site-packages/pandas/io/parsers.py:1159: DtypeWarning: Columns (6) have mixed types. Specify dtype option on import or set low\_memory=False.
+  data = self.\_reader.read(nrows)
+    \end{Verbatim}
+
+    A sample data frame looks like this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{fec}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+m+mi}{123456}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} cmte\_id                             C00431445
+         cand\_id                             P80003338
+         cand\_nm                         Obama, Barack
+         contbr\_nm                         ELLMAN, IRA
+         contbr\_city                             TEMPE
+         contbr\_st                                  AZ
+         contbr\_zip                          852816719
+         contbr\_employer      ARIZONA STATE UNIVERSITY
+         contbr\_occupation                   PROFESSOR
+         contb\_receipt\_amt                          50
+         contb\_receipt\_dt                    01-DEC-11
+         receipt\_desc                              NaN
+         memo\_cd                                   NaN
+         memo\_text                                 NaN
+         form\_tp                                 SA17A
+         file\_num                               772372
+         Name: 123456, dtype: object
+\end{Verbatim}
+        
+    One interesting aspect of this data set is the lack of partisanship as a
+way to classify candidates. We can add this information to the dataset.
+The way we are going to solve this problem is to create a dictionary
+indicating the politcal party of each candidate. First, we need to find
+out who all of the candidates are.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{unique\PYZus{}cands} \PY{o}{=} \PY{n}{fec}\PY{o}{.}\PY{n}{cand\PYZus{}nm}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+         \PY{n}{unique\PYZus{}cands}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} array(['Bachmann, Michelle', 'Romney, Mitt', 'Obama, Barack',
+                "Roemer, Charles E. 'Buddy' III", 'Pawlenty, Timothy',
+                'Johnson, Gary Earl', 'Paul, Ron', 'Santorum, Rick', 'Cain, Herman',
+                'Gingrich, Newt', 'McCotter, Thaddeus G', 'Huntsman, Jon',
+                'Perry, Rick'], dtype=object)
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{unique\PYZus{}cands}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:} 'Obama, Barack'
+\end{Verbatim}
+        
+    We use \texttt{parties} to specify a dictionary over all of the
+candidates.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{parties} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{Bachmann, Michelle}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Cain, Herman}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Gingrich, Newt}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Huntsman, Jon}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Johnson, Gary Earl}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{McCotter, Thaddeus G}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Obama, Barack}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Democrat}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Paul, Ron}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Pawlenty, Timothy}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Perry, Rick}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZdq{}}\PY{l+s}{Roemer, Charles E. }\PY{l+s}{\PYZsq{}}\PY{l+s}{Buddy}\PY{l+s}{\PYZsq{}}\PY{l+s}{ III}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Romney, Mitt}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{Santorum, Rick}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Republican}\PY{l+s}{\PYZsq{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    We can test our dictionary by viewing a section of the dataset to first
+view the candidate and then view their political affiliation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{fec}\PY{o}{.}\PY{n}{cand\PYZus{}nm}\PY{p}{[}\PY{l+m+mi}{123456}\PY{p}{:}\PY{l+m+mi}{123461}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:} 123456    Obama, Barack
+         123457    Obama, Barack
+         123458    Obama, Barack
+         123459    Obama, Barack
+         123460    Obama, Barack
+         Name: cand\_nm, dtype: object
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{fec}\PY{o}{.}\PY{n}{cand\PYZus{}nm}\PY{p}{[}\PY{l+m+mi}{123456}\PY{p}{:}\PY{l+m+mi}{123461}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{parties}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} 123456    Democrat
+         123457    Democrat
+         123458    Democrat
+         123459    Democrat
+         123460    Democrat
+         Name: cand\_nm, dtype: object
+\end{Verbatim}
+        
+    To calculate the number of contributions to each party, we use the
+\texttt{value\_counts} function to sum the number of contributions of
+each party.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c}{\PYZsh{} Add it as a column}
+         
+         \PY{n}{fec}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{party}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{fec}\PY{o}{.}\PY{n}{cand\PYZus{}nm}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{parties}\PY{p}{)}
+         
+         \PY{n}{fec}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{party}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}89}]:} Democrat      593746
+         Republican    407985
+         dtype: int64
+\end{Verbatim}
+        
+    Unfortunately, this counts both the positive and negative contributions
+to candidate's campaigns (negative values indcate refunds). Thus, to see
+the total number of donations to candidates in the 2012 US election we
+subset the receipt values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{p}{(}\PY{n}{fec}\PY{o}{.}\PY{n}{contb\PYZus{}receipt\PYZus{}amt} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} True     991475
+         False     10256
+         dtype: int64
+\end{Verbatim}
+        
+    To just use positive contibutions we use the following code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{fec} \PY{o}{=} \PY{n}{fec}\PY{p}{[}\PY{n}{fec}\PY{o}{.}\PY{n}{contb\PYZus{}receipt\PYZus{}amt} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{fec\PYZus{}mrbo} \PY{o}{=} \PY{n}{fec}\PY{p}{[}\PY{n}{fec}\PY{o}{.}\PY{n}{cand\PYZus{}nm}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Obama, Barack}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Romney, Mitt}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+    \subsubsection{Donation statistics by occupation and
+employer}\label{donation-statistics-by-occupation-and-employer}
+
+    One interesting question is the occupation of donors for each party. For
+example, do lawyers donate more to Democrats or Republicans? To which
+party do business executives donate more money?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{fec}\PY{o}{.}\PY{n}{contbr\PYZus{}occupation}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} RETIRED                                   233990
+         INFORMATION REQUESTED                      35107
+         ATTORNEY                                   34286
+         HOMEMAKER                                  29931
+         PHYSICIAN                                  23432
+         INFORMATION REQUESTED PER BEST EFFORTS     21138
+         ENGINEER                                   14334
+         TEACHER                                    13990
+         CONSULTANT                                 13273
+         PROFESSOR                                  12555
+         dtype: int64
+\end{Verbatim}
+        
+    We can again use a dictionary to better define the occupation of the
+donors, as well as the employers of the donors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{occ\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{INFORMATION REQUESTED PER BEST EFFORTS}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{NOT PROVIDED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{INFORMATION REQUESTED}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{NOT PROVIDED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{INFORMATION REQUESTED (BEST EFFORTS)}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{NOT PROVIDED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{C.E.O.}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{CEO}\PY{l+s}{\PYZsq{}}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{c}{\PYZsh{} If no mapping provided, return x}
+         \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{occ\PYZus{}mapping}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+         \PY{n}{fec}\PY{o}{.}\PY{n}{contbr\PYZus{}occupation} \PY{o}{=} \PY{n}{fec}\PY{o}{.}\PY{n}{contbr\PYZus{}occupation}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+         
+         \PY{n}{emp\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{INFORMATION REQUESTED PER BEST EFFORTS}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{NOT PROVIDED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{INFORMATION REQUESTED}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{NOT PROVIDED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{SELF}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{SELF\PYZhy{}EMPLOYED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s}{\PYZsq{}}\PY{l+s}{SELF EMPLOYED}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{SELF\PYZhy{}EMPLOYED}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{c}{\PYZsh{} If no mapping provided, return x}
+         \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{emp\PYZus{}mapping}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+         \PY{n}{fec}\PY{o}{.}\PY{n}{contbr\PYZus{}employer} \PY{o}{=} \PY{n}{fec}\PY{o}{.}\PY{n}{contbr\PYZus{}employer}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+    Using a \texttt{pivot\_table} we can view data on people who donated at
+least \$2 million.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{by\PYZus{}occupation} \PY{o}{=} \PY{n}{fec}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{contb\PYZus{}receipt\PYZus{}amt}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                         \PY{n}{index}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{contbr\PYZus{}occupation}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                         \PY{n}{columns}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{party}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{aggfunc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{sum}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{over\PYZus{}2mm} \PY{o}{=} \PY{n}{by\PYZus{}occupation}\PY{p}{[}\PY{n}{by\PYZus{}occupation}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2000000}\PY{p}{]}
+         \PY{n}{over\PYZus{}2mm}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}96}]:} party                 Democrat       Republican
+         contbr\_occupation                              
+         ATTORNEY           11141982.97   7477194.430000
+         CEO                 2074974.79   4211040.520000
+         CONSULTANT          2459912.71   2544725.450000
+         ENGINEER             951525.55   1818373.700000
+         EXECUTIVE           1355161.05   4138850.090000
+         HOMEMAKER           4248875.80  13634275.780000
+         INVESTOR             884133.00   2431768.920000
+         LAWYER              3160478.87    391224.320000
+         MANAGER              762883.22   1444532.370000
+         NOT PROVIDED        4866973.96  20565473.010000
+         OWNER               1001567.36   2408286.920000
+         PHYSICIAN           3735124.94   3594320.240000
+         PRESIDENT           1878509.95   4720923.760000
+         PROFESSOR           2165071.08    296702.730000
+         REAL ESTATE          528902.09   1625902.250000
+         RETIRED            25305116.38  23561244.489999
+         SELF-EMPLOYED        672393.40   1640252.540000
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{over\PYZus{}2mm}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}97}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f37d8e6db90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Acquiring and wrangling with data_files/Acquiring and wrangling with data_200_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Alternatively, we can view donors who gave to the campaigns of Barack
+Obama or Mitt Romney. We do this by grouping by candidate name using the
+\texttt{top} method that we learned earlier.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}top\PYZus{}amounts}\PY{p}{(}\PY{n}{group}\PY{p}{,} \PY{n}{key}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{totals} \PY{o}{=} \PY{n}{group}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{key}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{contb\PYZus{}receipt\PYZus{}amt}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c}{\PYZsh{} Order totals by key in descending order}
+             \PY{k}{return} \PY{n}{totals}\PY{o}{.}\PY{n}{order}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{grouped} \PY{o}{=} \PY{n}{fec\PYZus{}mrbo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{cand\PYZus{}nm}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{grouped}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}top\PYZus{}amounts}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{contbr\PYZus{}occupation}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+         
+         \PY{n}{grouped}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}top\PYZus{}amounts}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{contbr\PYZus{}employer}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:} cand\_nm        contbr\_employer                   
+         Obama, Barack  SOLIYA                                3.0
+                        CARR ENTERPRISES                      3.0
+                        PENN STATE DICKINSON SCHOOL OF LAW    3.0
+                        CADUCEUS OCCUPATIONAL MEDICINE        3.0
+                        N.A.                                  3.0
+                        REAL ENERGY CONSULTING SERVICES       3.0
+                        JPDSYSTEMS, LLC                       3.0
+                        CASS REGIONAL MED. CENTER             2.5
+                        ARCON CORP                            2.0
+                        THE VICTORIA GROUP, INC.              2.0
+         Romney, Mitt   EASTHAM CAPITAL                       5.0
+                        GREGORY GALLIVAN                      5.0
+                        DIRECT LENDERS LLC                    5.0
+                        LOUGH INVESTMENT ADVISORY LLC         4.0
+                        WATERWORKS INDUSRTIES                 3.0
+                        WILL MERRIFIELD                       3.0
+                        HONOLD COMMUNICTAIONS                 3.0
+                        INDEPENDENT PROFESSIONAL              3.0
+                        UPTOWN CHEAPSKATE                     3.0
+                        UN                                    3.0
+         Name: contb\_receipt\_amt, dtype: float64
+\end{Verbatim}
+        
+    \subsubsection{Bucketing donation
+amounts}\label{bucketing-donation-amounts}
+
+    A useful way to analyze data is to use the \texttt{cut} function to
+partition the data into comparable buckets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{,} \PY{l+m+mi}{1000000}\PY{p}{,} \PY{l+m+mi}{10000000}\PY{p}{]}\PY{p}{)}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{fec\PYZus{}mrbo}\PY{o}{.}\PY{n}{contb\PYZus{}receipt\PYZus{}amt}\PY{p}{,} \PY{n}{bins}\PY{p}{)}
+         \PY{n}{labels}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:} 411      (10, 100]
+         412    (100, 1000]
+         413    (100, 1000]
+         414      (10, 100]
+         415      (10, 100]
+         416      (10, 100]
+         417    (100, 1000]
+         418      (10, 100]
+         419    (100, 1000]
+         420      (10, 100]
+         421      (10, 100]
+         422    (100, 1000]
+         423    (100, 1000]
+         424    (100, 1000]
+         425    (100, 1000]
+         {\ldots}
+         701371        (10, 100]
+         701372        (10, 100]
+         701373        (10, 100]
+         701374        (10, 100]
+         701375        (10, 100]
+         701376    (1000, 10000]
+         701377        (10, 100]
+         701378        (10, 100]
+         701379      (100, 1000]
+         701380    (1000, 10000]
+         701381        (10, 100]
+         701382      (100, 1000]
+         701383          (1, 10]
+         701384        (10, 100]
+         701385      (100, 1000]
+         Name: contb\_receipt\_amt, Length: 694282, dtype: category
+         Categories (8, object): [(0, 1] < (1, 10] < (10, 100] < (100, 1000] < (1000, 10000] < (10000, 100000] < (100000, 1000000] < (1000000, 10000000]]
+\end{Verbatim}
+        
+    Grouping the data by name and bin, we get a histogram by donation size.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{fec\PYZus{}mrbo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{cand\PYZus{}nm}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{labels}\PY{p}{]}\PY{p}{)}
+          \PY{n}{grouped}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}100}]:} cand\_nm              Obama, Barack  Romney, Mitt
+          contb\_receipt\_amt                               
+          (0, 1]                         493            77
+          (1, 10]                      40070          3681
+          (10, 100]                   372280         31853
+          (100, 1000]                 153991         43357
+          (1000, 10000]                22284         26186
+          (10000, 100000]                  2             1
+          (100000, 1000000]                3           NaN
+          (1000000, 10000000]              4           NaN
+\end{Verbatim}
+        
+    The data shows that Barack Obama received significantly more
+contributions of smaller donation sizes. We can also sum the
+contribution amounts and normalize the data to view a percentage of
+total donations of each size by candidate:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{bucket\PYZus{}sums} \PY{o}{=} \PY{n}{grouped}\PY{o}{.}\PY{n}{contb\PYZus{}receipt\PYZus{}amt}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{bucket\PYZus{}sums}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}101}]:} cand\_nm              Obama, Barack  Romney, Mitt
+          contb\_receipt\_amt                               
+          (0, 1]                      318.24         77.00
+          (1, 10]                  337267.62      29819.66
+          (10, 100]              20288981.41    1987783.76
+          (100, 1000]            54798531.46   22363381.69
+          (1000, 10000]          51753705.67   63942145.42
+          (10000, 100000]           59100.00      12700.00
+          (100000, 1000000]       1490683.08           NaN
+          (1000000, 10000000]     7148839.76           NaN
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{normed\PYZus{}sums} \PY{o}{=} \PY{n}{bucket\PYZus{}sums}\PY{o}{.}\PY{n}{div}\PY{p}{(}\PY{n}{bucket\PYZus{}sums}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{normed\PYZus{}sums}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}102}]:} cand\_nm              Obama, Barack  Romney, Mitt
+          contb\_receipt\_amt                               
+          (0, 1]                    0.805182      0.194818
+          (1, 10]                   0.918767      0.081233
+          (10, 100]                 0.910769      0.089231
+          (100, 1000]               0.710176      0.289824
+          (1000, 10000]             0.447326      0.552674
+          (10000, 100000]           0.823120      0.176880
+          (100000, 1000000]         1.000000           NaN
+          (1000000, 10000000]       1.000000           NaN
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{normed\PYZus{}sums}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{stacked}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}103}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f38001d0b90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Acquiring and wrangling with data_files/Acquiring and wrangling with data_211_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Donation statistics by
+state}\label{donation-statistics-by-state}
+
+    We can also aggregate donations by candidate and state:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{fec\PYZus{}mrbo}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{cand\PYZus{}nm}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{contbr\PYZus{}st}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{totals} \PY{o}{=} \PY{n}{grouped}\PY{o}{.}\PY{n}{contb\PYZus{}receipt\PYZus{}amt}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{totals} \PY{o}{=} \PY{n}{totals}\PY{p}{[}\PY{n}{totals}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{100000}\PY{p}{]}
+          \PY{n}{totals}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:} cand\_nm    Obama, Barack  Romney, Mitt
+          contbr\_st                             
+          AK             281840.15      86204.24
+          AL             543123.48     527303.51
+          AR             359247.28     105556.00
+          AZ            1506476.98    1888436.23
+          CA           23824984.24   11237636.60
+          CO            2132429.49    1506714.12
+          CT            2068291.26    3499475.45
+          DC            4373538.80    1025137.50
+          DE             336669.14      82712.00
+          FL            7318178.58    8338458.81
+\end{Verbatim}
+        
+    Additionally, we may obtain the relative percentage of total donations
+by state for each candidate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{percent} \PY{o}{=} \PY{n}{totals}\PY{o}{.}\PY{n}{div}\PY{p}{(}\PY{n}{totals}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{percent}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}105}]:} cand\_nm    Obama, Barack  Romney, Mitt
+          contbr\_st                             
+          AK              0.765778      0.234222
+          AL              0.507390      0.492610
+          AR              0.772902      0.227098
+          AZ              0.443745      0.556255
+          CA              0.679498      0.320502
+          CO              0.585970      0.414030
+          CT              0.371476      0.628524
+          DC              0.810113      0.189887
+          DE              0.802776      0.197224
+          FL              0.467417      0.532583
+\end{Verbatim}
+        
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

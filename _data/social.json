@@ -1,7 +1,7 @@
 [
   {
-    "icon": "fa-facebook",
-    "link": ""
+    "icon": "fa-envelope",
+    "link": "mailto:kraemerd17@grinnell.edu"
   },
   {
     "icon": "fa-github",
@@ -9,10 +9,6 @@
   },
   {
     "icon": "fa-linkedin",
-    "link": ""
+    "link": "https://www.linkedin.com/in/davidnkraemer"
   },
-  {
-    "icon": "fa-stack-exchange",
-    "link": ""
-  }
 ]

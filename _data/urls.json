@@ -1,21 +1,14 @@
 [
     {
         "text": "Home",
-        "url": "/about/",
-        "icon": "fa-home",
-        "layout": "post"
-    },
-    {
-        "text": "Blog",
-        "url": "/blog/",
-        "icon": "fa-rocket"
+        "url": "/",
+        "icon": "fa-home"
     },
     {
         "text": "Courses",
         "url": "/courses/",
         "icon": "fa-institution"
     },
-
     {
         "text": "Projects",
         "url": "/projects/",
@@ -28,9 +21,13 @@
         "layout": "post"
     },
     {
-        "text": "XML Feed",
-        "url": "/feed.xml",
-        "icon": "fa-feed",
-        "target": _blank
+        "text": "Blog",
+        "url": "/blog/",
+        "icon": "fa-rocket"
+    },
+    {
+        "text": "Challah",
+        "url": "/challah/",
+        "icon": "fa-cutlery"
     }
 ]

@@ -1,0 +1,1536 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Visualization with Matplotlib}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Overview of \texttt{matplotlib}}\label{overview-of-matplotlib}
+
+    So far in our course, we've covered basic \texttt{Python} to more
+advanced features of \texttt{Python}'s array processing and data
+analysis libraries. While we have gotten into the meat of handling
+numbers themselves, it would be nice to have a library of tools to
+visualize these underlying data in a powerful but aesthetic way. The
+solution, which has become a massive open-source project in its own
+right, is \texttt{matplotlib}. From the \texttt{matplotlib}
+\href{http://matplotlib.org/1.2.1/index.html}{homepage}:
+
+\begin{quote}
+\texttt{matplotlib} is a python 2D plotting library which produces
+publication quality figures in a variety of hardcopy formats and
+interactive environments across platforms. matplotlib can be used in
+python scripts, the python and ipython shell (ala MATLAB® or
+Mathematica®†), web application servers, and six graphical user
+interface toolkits.
+\end{quote}
+
+\begin{quote}
+\texttt{matplotlib} tries to make easy things easy and hard things
+possible. You can generate plots, histograms, power spectra, bar charts,
+errorcharts, scatterplots, etc, with just a few lines of code. For a
+sampling, see the
+\href{http://matplotlib.org/1.2.1/users/screenshots.html}{screenshots},
+\href{http://matplotlib.org/1.2.1/gallery.html}{thumbnail gallery}, and
+\href{http://matplotlib.org/1.2.1/examples/index.html}{examples
+directory}.
+\end{quote}
+
+\begin{quote}
+For the power user, you have full control of line styles, font
+properties, axes properties, etc, via an object oriented interface or
+via a set of functions familiar to MATLAB users.
+\end{quote}
+
+    Let's import all of the libraries we will use in this session.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k+kn}{import} \PY{n}{division}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12345}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{figure}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k+kn}{import} \PY{n}{Series}\PY{p}{,} \PY{n}{DataFrame}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+    When you use the \texttt{IPython} notebook, you can print plots to the
+output of individual cells by including the magic command:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+    There are two ways to think about creating and displaying plots using
+\texttt{matplotlib}. The first, and simpler, approach is the imperative,
+``scripting'' paradigm. Modeled after the plotting functionality of
+MATLAB, this gives you an easy way to generate a large quantity of
+plots.
+
+The second paradigm is the object-oriented approach, which requires a
+larger amount of initial code, but with a much higher degree of
+flexibility and robust functionality.
+
+    \section{The MATLAB approach}\label{the-matlab-approach}
+
+    The main module that we use to generate plots is the \texttt{pyplot}
+submodule of \texttt{matplotlib}. According to established convention,
+we import this module as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+    From now on, we will use \texttt{plt} to denote methods and fields in
+the \texttt{pyplot} module. Here is a simple demonstration of the MATLAB
+approach to plotting.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)} \PY{c}{\PYZsh{} generates an ndarray from 0 to 9.9}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} [<matplotlib.lines.Line2D at 0x7fe665a9a4d0>]
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The \texttt{plot} function takes an array-like type and produces a line
+plot of the array. If you give \texttt{plot} a single array, it will
+implicitly assume that you mean to plot coordinate pairs $(i,arr[i])$,
+where $i$ is an integer.
+
+Instead, you can pass two arrays $x$ and $y$ (of the same size), which
+produces a plot of coordinates $(x[i], y[i])$.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{2.0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} (-1.1, 1.1)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It is very simple to customize the style of the plots.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{o}{?}
+\end{Verbatim}
+
+    \subparagraph{Line color and marker
+arguments}\label{line-color-and-marker-arguments}
+
+By passing in an optional character argument, you can specify the color
+of the line being plotted.
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule\addlinespace
+Character & Color
+\\\addlinespace
+\midrule\endhead
+\texttt{'b'} & blue
+\\\addlinespace
+\texttt{'g'} & green
+\\\addlinespace
+\texttt{'r'} & red
+\\\addlinespace
+\texttt{'c'} & cyan
+\\\addlinespace
+\texttt{'m'} & magenta
+\\\addlinespace
+\texttt{'y'} & yellow
+\\\addlinespace
+\texttt{'k'} & black
+\\\addlinespace
+\texttt{'w'} & white
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+Alternatively, you can specify a custom (e.g.~hexadecimal) color by
+passing a \texttt{color=\#123456} argument.
+
+For customizing the line marker shapes, you can specify from a number of
+built-in arguments.
+
+\begin{longtable}[c]{@{}llll@{}}
+\toprule\addlinespace
+Character & Description & Character & Description
+\\\addlinespace
+\midrule\endhead
+\texttt{'-'} & solid line style & \texttt{'3'} & tri\_left marker
+\\\addlinespace
+\texttt{'-\/-'} & dashed line style & \texttt{'4'} & tri\_right marker
+\\\addlinespace
+\texttt{'-.'} & dash-dot line style & \texttt{'s'} & square marker
+\\\addlinespace
+\texttt{':'} & dotted line style & \texttt{'p'} & pentagon marker
+\\\addlinespace
+\texttt{'.'} & point marker & \texttt{'*'} & star marker
+\\\addlinespace
+\texttt{','} & pixel marker & \texttt{'h'} & hexagon1 marker
+\\\addlinespace
+\texttt{'o'} & circle marker & \texttt{'H'} & hexagon2 marker
+\\\addlinespace
+\texttt{'v'} & triangle\_down marker & \texttt{'+'} & plus marker
+\\\addlinespace
+\texttt{'\^{}'} & triangle\_up marker & \texttt{'x'} & x marker
+\\\addlinespace
+\texttt{'\textless{}'} & triangle\_left marker & \texttt{'D'} & diamond
+marker
+\\\addlinespace
+\texttt{'\textgreater{}'} & triangle\_right marker & \texttt{'d'} &
+thin\_diamond marker
+\\\addlinespace
+\texttt{'1'} & tri\_down marker & \texttt{'\_'} & hline marker
+\\\addlinespace
+\texttt{'2'} & tri\_up marker
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+    There are even more keyword arguments, but we won't go into the details
+here. Here is a simple example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{1}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{:}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{m}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{drawstyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{steps\PYZhy{}post}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} [<matplotlib.lines.Line2D at 0x7fe665920e10>]
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice that calling \texttt{plot} several times in one cell allows you
+to plot several graphs on one figure.
+
+Now, let's customize the title, labels, legend, and ticks of the plot.
+In the MATLAB paradigm, we can use simple figure methods like
+\texttt{title}, \texttt{xlabel}, and \texttt{ylabel}, as well as call
+the \texttt{legend} method. To specify a legend string, include the
+optional argument \texttt{label} in the plot method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{k}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{A random walk (\PYZdl{}X(n)\PYZdl{})}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Another walk (\PYZdl{}Y(n)\PYZdl{})}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} Title and labels}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{This is the figure title}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{The horizontal axis (\PYZdl{}n\PYZdl{})}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{The vertical axis}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} Tick values}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1001}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{)}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{51}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{best}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{c}{\PYZsh{} especially useful for random data}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.legend.Legend at 0x7fe6658deb90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    If you notice carefully, \texttt{matplotlib} can render \LaTeX in
+title, axis, and legend strings. Simply include the \LaTeX dollar sign
+and \texttt{matplotlib} will do the rest for you. Now, there are tricky
+grey-areas with this functionality. For example, if you want to typeset
+the Greek letter $\tau$ on your plots, \texttt{matplotlib} will not
+properly interpret the string. (Why is this? See if you can figure out
+why.) To force \texttt{matplotlib} to interpret strings literally, you
+can instead write \texttt{r'\$\textbackslash{}tau\$'}, which will tell
+\texttt{matplotlib} to ignore the formatting ambiguity.
+
+There are tons of ways to customize your plots further, but we'll leave
+this to your exploration of the \texttt{matplotlib} documentation.
+
+    \section{The object-oriented
+approach}\label{the-object-oriented-approach}
+
+    Whereas in the MATLAB approach, all plotting activity was centered
+around the \texttt{matplotlib} \emph{figure}, the object-oriented
+approach shifts this attention to the \emph{axis}.
+
+When you begin plotting, you first initialize a figure and then add axes
+to the figure. Each axis now functions as its own plotting environment,
+which allows you to specify all of the previous functions nearly
+identically as before.
+
+Why go to all of this work to specify the axis objects? The immediate
+advantage is that you can now easily construct \textbf{several} axes on
+one figure, which is an ability I have personally found incredibly
+useful.
+
+Here is a simple way to get started:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} instantiate a new figure object}
+        
+        \PY{c}{\PYZsh{} Add three axes aligned horizontally}
+        \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{ax3} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+        
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} Simple plot}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} Histogram plot}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} Scatter plot, parametric}
+        \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{o}{*}\PY{n}{x}\PY{p}{)}
+        
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Axis 1}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Axis 2}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Axis 3}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{r\PYZdq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{tan(x)\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Random sampling}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{r\PYZdq{}}\PY{l+s}{\PYZdl{}(}\PY{l+s}{\PYZbs{}}\PY{l+s}{sin(x),x\PYZca{}2)\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <matplotlib.text.Text at 0x7fe665722d50>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Here, we construct subplots by using the \texttt{add\_subplot} method.
+The first two arguments of \texttt{add\_subplot} indicate the number of
+rows and columns, respectively. Notice that for axes objects, we use
+\texttt{set\_xlabel} and \texttt{set\_title} instead of \texttt{xlabel}
+and \texttt{title}, but otherwise the functions work as one might expect
+compared to the MATLAB approach. This is generally the case for axes
+methods.
+
+Beyond \texttt{plot}, \texttt{matplotlib} provides a host of other
+plotting methods, depending on exactly what your visualization needs. On
+display here is the \texttt{hist} and \texttt{scatter} methods.
+\texttt{hist} takes an array and plots the distribution of values of the
+array in a bar chart. \texttt{scatter} is similar to \texttt{plot}, but
+it requires exactly two arrays to generate coordinate pairs.
+
+One way to deal with a large number of axes is to think about them as
+iterable objects. This can \emph{dramatically} reduce the amount of code
+requisite to do sophisticated plots. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+                 \PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{g}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+                 \PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Realization }\PY{l+s+si}{\PYZpc{}i}\PY{l+s}{,}\PY{l+s+si}{\PYZpc{}i}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Of note, you can specify whether two (or in the above case,
+\emph{every}) subplots share an x or y-axis. This can be a nice
+technique to reduce the clutter around a plot. Another function that is
+useful for figure formatting is \texttt{subplots\_adjust}, which allows
+you to specify the spacing between plots and the margins from the
+borders of the aggregate figure.
+
+    \section{Plotting functions}\label{plotting-functions}
+
+    Here we will use the MATLAB approach just for brevity of code. We have
+already seen \texttt{plot} fairly extensively, so now we will explore
+other \texttt{matplotlib} plotting functions that you might want to
+explore.
+
+    \subsection{\texttt{bar} and \texttt{barh}}\label{bar-and-barh}
+
+    The \texttt{bar} and \texttt{barh} methods allow you to generate bar
+plots, with the distinction that \texttt{bar} orients the rectangles of
+the plot along the vertical axis while \texttt{barh} orients along the
+horizontal axis. Outside from orientation, both work identically (we
+will from now on assume \texttt{bar}).
+
+\texttt{bar} takes an array denoting the x-coordinates of the left sides
+of the bars and an array denoting the heights of the bars. Optionally,
+you can add a scalar value (or array, for each bar) to denote the width
+of every bar. As with every plotting function, you can then specify
+color, transparency (alpha), and the legend label of the bars. For bar
+plots, you can add additional options, \texttt{xerr} and \texttt{yerr},
+to specify the error bars in the x and y directions for the plot.
+
+As a first example, we simply create a bar chart denoting increasing
+values:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{vals}\PY{p}{,} \PY{n}{vals} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <Container object of 10 artists>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Of course, we can make this much more sophisticated. Here's a fun
+example that demonstrates some of the main features of \texttt{bar}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{width} \PY{o}{=} \PY{l+m+mf}{0.2}
+         \PY{n}{rows} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{data1} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{2.0}\PY{o}{/}\PY{p}{(}\PY{n}{rows} \PY{o}{+}\PY{l+m+mf}{1.0}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{rows}\PY{p}{)}
+         \PY{n}{data2} \PY{o}{=} \PY{l+m+mf}{2.}\PY{o}{/}\PY{p}{(}\PY{n}{rows} \PY{o}{+} \PY{l+m+mf}{1.}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{rows}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n}{data1}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{y}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} 
+                 \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Perceived Knowledge of C}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n}{data2}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Happiness}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{best}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{2.0}\PY{p}{,}\PY{l+m+mf}{4.0}\PY{p}{,}\PY{l+m+mf}{7.0}\PY{p}{,}\PY{l+m+mf}{9.0}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{None}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Pointer syntax}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Pointer arithmetic}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+                     \PY{l+s}{\PYZdq{}}\PY{l+s}{Passing pointers}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+                     \PY{l+s}{\PYZdq{}}\PY{l+s}{Function pointers}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Material covered in CSC 161}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{C is a frustrating language}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <matplotlib.text.Text at 0x7fe664d51390>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.85}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{center}\PY{l+s}{\PYZsq{}}\PY{p}{,} 
+                  \PY{n}{xerr}\PY{o}{=} \PY{l+m+mf}{0.05} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)} 
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{This}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{A}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Bar}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Plot}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{With}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Custom}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+                        \PY{l+s}{\PYZdq{}}\PY{l+s}{Tags}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{For}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{You}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{To}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{See}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} ([<matplotlib.axis.YTick at 0x7fe66482cb50>,
+           <matplotlib.axis.YTick at 0x7fe664774550>,
+           <matplotlib.axis.YTick at 0x7fe6646fca50>,
+           <matplotlib.axis.YTick at 0x7fe6646467d0>,
+           <matplotlib.axis.YTick at 0x7fe664646f10>,
+           <matplotlib.axis.YTick at 0x7fe664650690>,
+           <matplotlib.axis.YTick at 0x7fe664650dd0>,
+           <matplotlib.axis.YTick at 0x7fe664659550>,
+           <matplotlib.axis.YTick at 0x7fe664659c90>,
+           <matplotlib.axis.YTick at 0x7fe664665410>],
+          <a list of 10 Text yticklabel objects>)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Plotting functions in
+pandas}\label{plotting-functions-in-pandas}
+
+    It's important to know how to build plots manually from data stored in
+\texttt{NumPy}. However, we can also use \texttt{Pandas} to produce
+high-quality \texttt{matplotlib} plots from existing \texttt{Series} and
+\texttt{DataFrame} objects with considerable ease and flexibility.
+
+This section will walk through a variety of options you have at your
+disposal when building visualizations with \texttt{Pandas}, but is by no
+means exhaustive. For more information, check out the
+\href{http://pandas.pydata.org/pandas-docs/stable/}{Pandas
+Documentation}.
+
+    \subsubsection{Line plots}\label{line-plots}
+
+    Given a \texttt{Series} object, one natural approach to plotting is with
+line plots. This is the default behavior of the method
+\texttt{Series.plot}, displayed below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{s} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{s}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe6659664d0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This extends naturally to the \texttt{DataFrame} object. Since
+\texttt{DataFrame} objects already label the columns of their internal
+data, it is also easy to produce legends.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{C}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{D}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{index}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe664594910>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Bar plots}\label{bar-plots}
+
+    Of course, there are many more types of visualization than line plots.
+In general, one can specify the type of plot a \texttt{Series} or
+\texttt{DataFrame} generates by changing the optional parameter
+\texttt{kind}.
+
+Here is an example showcasing the \texttt{bar} and \texttt{barh} plots
+we saw earlier. Additionally, we can specify the specific axis we want
+as the base of the plot. \texttt{Pandas} takes care of the formatting as
+well.
+
+Plotting with \texttt{Pandas} plays nicely with both the MATLAB-style of
+generation, as with the prior examples, or with the Object-oriented
+paradigm, as below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{abcdefghijklmnop}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{k}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{k}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe6643cb0d0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Again, \texttt{DataFrame} objects have similar functionality. Consider
+the following \texttt{DataFrame}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{three}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{four}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{five}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{six}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{columns}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{Index}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{C}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{D}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Genus}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} Genus         A         B         C         D
+         one    0.836035  0.383135  0.413375  0.823983
+         two    0.748730  0.808821  0.582242  0.856516
+         three  0.611993  0.401634  0.489481  0.027948
+         four   0.823606  0.948357  0.974807  0.023504
+         five   0.324714  0.376265  0.946262  0.934007
+         six    0.569295  0.366941  0.979173  0.634197
+\end{Verbatim}
+        
+    We can plot the data in a bar graph just as we would for a
+\texttt{Series} object. Notice that the legend by default is not fixed
+to any particular location on the plot. This is the \texttt{"best"}
+parameter choice for legend location. You can hide the legend by
+specifying \texttt{legend=False}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe664491310>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Bar plots can also be stacked by using the \texttt{stacked} parameter.
+Notice also that when using \texttt{bar} or \texttt{barh},
+\texttt{Pandas} takes care of aligning the data properly to its index
+label, using the column label for the legend.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{stacked}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe664094890>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now, Wes Mckinney has a collection of restaurant tip data in
+\texttt{csv} format that you can download \href{}{here}. We can load up
+the file and put it directly into a \texttt{DataFrame} object using
+\texttt{read\_csv} (more on this next week!).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{tips} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{mckinney\PYZhy{}files/tips.csv}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{tips}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)} \PY{c}{\PYZsh{} head specifies to display a reasonable amount of output.}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}    total\_bill   tip     sex smoker  day    time  size
+         0       16.99  1.01  Female     No  Sun  Dinner     2
+         1       10.34  1.66    Male     No  Sun  Dinner     3
+         2       21.01  3.50    Male     No  Sun  Dinner     3
+         3       23.68  3.31    Male     No  Sun  Dinner     2
+         4       24.59  3.61  Female     No  Sun  Dinner     4
+\end{Verbatim}
+        
+    We want to cross-tabulate between the day of the week and the size of
+the party. In other words, we want to count how many parties of one were
+seated on Friday; how many parties of two; etc, for each day of the week
+we have data (Friday, Saturday, Sunday, and Thursday). To do this we
+will use \texttt{crosstab}.
+
+First, let's look at the columns formed by \texttt{tips}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} Index([u'total\_bill', u'tip', u'sex', u'smoker', u'day', u'time', u'size'], dtype='object')
+\end{Verbatim}
+        
+    We can cross-tabulate between the day of the week (Thursday, Friday,
+Saturday, or Sunday) and the number of guests per party (1-6), using
+\texttt{crosstab}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{party\PYZus{}counts} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{day}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{size}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{party\PYZus{}counts}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} size  1   2   3   4  5  6
+         day                      
+         Fri   1  16   1   1  0  0
+         Sat   2  53  18  13  1  0
+         Sun   0  39  15  18  3  1
+         Thur  1  48   4   5  1  3
+\end{Verbatim}
+        
+    Now, we can proceed to the analysis. One type of plot would simply show
+the breakdown of guests given a day of the week.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{party\PYZus{}counts}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe6651ade90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_60_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Not so enlightening, because there is wide variation in the data. Let's
+restrict our analysis to parties with a size between 2 and 5
+(inclusive).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c}{\PYZsh{} Not many 1\PYZhy{} and 6\PYZhy{}person parties}
+         \PY{n}{party\PYZus{}counts} \PY{o}{=} \PY{n}{party\PYZus{}counts}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+    We can ``normalize'' the daily data by dividing the values of a
+particular entry by the sum of the values along that row. Notice that we
+use \texttt{astype(float)} to make sure that no integer division
+problems are encountered, and we specify \texttt{axis=0} to say that we
+are normalizing along the day, not the party.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c}{\PYZsh{} Normalize to sum to 1}
+         \PY{n}{party\PYZus{}pcts} \PY{o}{=} \PY{n}{party\PYZus{}counts}\PY{o}{.}\PY{n}{div}\PY{p}{(}\PY{n}{party\PYZus{}counts}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{party\PYZus{}pcts}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} size         2         3         4         5
+         day                                         
+         Fri   0.888889  0.055556  0.055556  0.000000
+         Sat   0.623529  0.211765  0.152941  0.011765
+         Sun   0.520000  0.200000  0.240000  0.040000
+         Thur  0.827586  0.068966  0.086207  0.017241
+\end{Verbatim}
+        
+    Given this new percentage data, it might make more sense to stack the
+bars so we can see how the distribution changes from day to day.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{party\PYZus{}pcts}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{stacked}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{center left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} <matplotlib.legend.Legend at 0x7fe664ef7990>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_66_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Parties seem to get much larger on weekends, while couples dominate
+during weekdays. Not bad for a short analysis!
+
+    \subsubsection{Histograms and density
+plots}\label{histograms-and-density-plots}
+
+    Of course, one might also ask what the distribution of tip percentages a
+server can expect to see at a given night. \texttt{Pandas} helps us
+answer this with the easy integration of histograms and density plots.
+
+    First, let's calculate tip percentages. Luckily, the tip data and the
+total bill data are already given, so adding a new column is simple.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{total\PYZus{}bill}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Histogram of tip percentages}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.text.Text at 0x7fe664f8ccd0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_71_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Looks like the average is right about 15\%. Not too shocking. Perhaps
+instead of a histogram of bins, you want to show a smooth distribution
+of density. To do so, we can simply choose the \texttt{kde} style of
+plot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{tips}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tip\PYZus{}pct}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kde}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe664ae2f90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_73_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Quiz:}\label{quiz}
+
+Are the above two plots \texttt{Series} plots or \texttt{DataFrame}
+plots?
+
+    You can actually plot histograms and density plots together. Consider
+the following random data samples.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{comp1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}  \PY{c}{\PYZsh{} N(0, 1)}
+         \PY{n}{comp2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}  \PY{c}{\PYZsh{} N(10, 4)}
+\end{Verbatim}
+
+    By having one cell plot both a histogram and a kernel density estimate
+plot, we can overlay the two of them together to form a solid
+understanding of the distribution of data in the set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{values} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{comp1}\PY{p}{,} \PY{n}{comp2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{values}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{g}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{normed}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{values}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kde}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{style}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{k\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fe65c3960d0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_78_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This allows us to provide a considerable amount of information compactly
+into one figure. We can also do it without losing the essence of the
+visualization.
+
+    \subsubsection{Scatter plots}\label{scatter-plots}
+
+    When infering the relationship between two series of data, the scatter
+plot can provide significant assistance to visualize correlation.
+Consider the following economic data, which you can download as a
+\texttt{csv} file from \href{}{here}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{macro} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{mckinney\PYZhy{}files/macrodata.csv}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{macro}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{year}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{quarter}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}                 realgdp  realcons   realinv  realgovt  realdpi      cpi  \textbackslash{}
+         year quarter                                                              
+         2008 3        13324.600    9267.7  1990.693   991.551   9838.3  216.889   
+              4        13141.920    9195.3  1857.661  1007.273   9920.4  212.174   
+         2009 1        12925.410    9209.2  1558.494   996.287   9926.4  212.671   
+              2        12901.504    9189.0  1456.678  1023.528  10077.5  214.469   
+              3        12990.341    9256.0  1486.398  1044.088  10040.6  216.385   
+         
+                           m1  tbilrate  unemp      pop  infl  realint  
+         year quarter                                                   
+         2008 3        1474.7      1.17    6.0  305.270 -3.16     4.33  
+              4        1576.5      0.12    6.9  305.952 -8.79     8.91  
+         2009 1        1592.8      0.22    8.1  306.547  0.94    -0.71  
+              2        1653.6      0.18    9.2  307.226  3.37    -3.19  
+              3        1673.9      0.12    9.6  308.013  3.56    -3.44  
+\end{Verbatim}
+        
+    This is a macroeconomic dataset containing the following metrics: * real
+gross domestic product * real aggregate consumption * real investment *
+real government investment * real disposable income * consumer prices *
+M1 money stock * Treasury bill 1-month yields * unemployment rate *
+population * inflation * real interest rates
+
+It's a fair bet that this is more information than we want to process at
+the moment, so we can define a new \texttt{DataFrame} considering only
+the essence of the data we need in this example.
+
+Wes McKinney then takes the data and applies transformations to make the
+visualization easier.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{data} \PY{o}{=} \PY{n}{macro}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{cpi}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{m1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{tbilrate}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{unemp}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{trans\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         \PY{n}{trans\PYZus{}data}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}           cpi        m1  tbilrate     unemp
+         198 -0.007904  0.045361 -0.396881  0.105361
+         199 -0.021979  0.066753 -2.277267  0.139762
+         200  0.002340  0.010286  0.606136  0.160343
+         201  0.008419  0.037461 -0.200671  0.127339
+         202  0.008894  0.012202 -0.405465  0.042560
+\end{Verbatim}
+        
+    How does the change in the size of M1 correspond to changes in the
+unemployment rate? Let's find out!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{trans\PYZus{}data}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{m1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{trans\PYZus{}data}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{unemp}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Change in \PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{log M\PYZus{}1\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Change in unemployment}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Changes in log }\PY{l+s+si}{\PYZpc{}s}\PY{l+s}{ vs. log }\PY{l+s+si}{\PYZpc{}s}\PY{l+s}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{m1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{unemp}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} <matplotlib.text.Text at 0x7fe65bfb2750>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_86_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It looks like increases in the money supply may have a positive effect
+on the unemployment rate. Although, it is difficult to say exactly how
+(we might need a model to infer anything more). Certainly, unemployment
+seems to be decreasing when the money supply shrinks, according to the
+data.
+
+    Suppose you have a new dataset and you have no idea how the various
+series are related. One quick approach to get a feel for the
+relationships, which you can later expand upon in a more thorough
+analysis, is the scatter matrix. Given $n$ series of data,
+\texttt{scatter\_matrix} produces an $n\times n$ matrix of scatter plots
+corresponding to pairs of data.
+
+    The question is what to do on the main diagonal; a scatter plot of a
+data series with itself is quite uninteresting. Instead, the default
+behavior is to produce a histogram of the data series, but you can
+specify this to be a \texttt{kde} plot using the \texttt{diag} optional
+parameter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{trans\PYZus{}data}\PY{p}{,} \PY{n}{diagonal}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kde}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{k}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65c01ad50>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bf280d0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65be3cbd0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bdac350>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bd2f150>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bd5a310>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bc94d90>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bb99fd0>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bb7bf90>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65bb0c210>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe665a00f50>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65ba2ced0>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65b9b1b10>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65b921190>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65b898e90>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x7fe65b873a10>]], dtype=object)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_90_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Image Processing}\label{image-processing}
+
+    In the module we will start an application of \texttt{scipy} and
+\texttt{numpy} in order to manipulate images. For further resources we
+are using ideas and from
+\texttt{http://scipy-lectures.github.io/advanced/image\_processing/}.
+
+    \subsection{Displaying Files}\label{displaying-files}
+
+    First we need to import the \texttt{scipy} and \texttt{numpy} into our
+file. After doing this we want to write an array into a file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k+kn}{import} \PY{n}{misc}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{l} \PY{o}{=} \PY{n}{misc}\PY{o}{.}\PY{n}{lena}\PY{p}{(}\PY{p}{)}
+         \PY{n}{misc}\PY{o}{.}\PY{n}{imsave}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{lena.png}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{l}\PY{p}{)} \PY{c}{\PYZsh{} uses the Image module (PIL)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <matplotlib.image.AxesImage at 0x7fe65b2bc890>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_97_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can also change the color of our image to reflect the original
+greyscale.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} <matplotlib.image.AxesImage at 0x7fe65b1aef90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_99_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can increase the contrast by changing the mininimum and maximum
+values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{c}{\PYZsh{} Remove axes and ticks}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} (-0.5, 511.5, 511.5, -0.5)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_101_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    An interesting image processing technique is drawing contour lines. We
+can do this using \texttt{plt.contour}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{,}\PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{60}\PY{p}{,} \PY{l+m+mi}{150}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} (-0.5, 511.5, 511.5, -0.5)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_103_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can inspect individual elements for intensity variation using
+\texttt{interpolation='nearest'}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{:}\PY{l+m+mi}{220}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{:}\PY{l+m+mi}{220}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{:}\PY{l+m+mi}{220}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{:}\PY{l+m+mi}{220}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{,} 
+                    \PY{n}{interpolation}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{nearest}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} <matplotlib.image.AxesImage at 0x7fe6599603d0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_105_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Basic Image Manipulations}\label{basic-image-manipulations}
+
+    Images are arrays. Consequently, we can use array manipulations that we
+used from \texttt{numpy}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{lena} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{lena}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lena}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{:}\PY{l+m+mi}{23}\PY{p}{]}
+         \PY{n}{lena}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+         
+         \PY{n}{lx}\PY{p}{,} \PY{n}{ly} \PY{o}{=} \PY{n}{lena}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ogrid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{lx}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{n}{ly}\PY{p}{]}
+         \PY{n}{mask} \PY{o}{=} \PY{p}{(}\PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{lx}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{Y} \PY{o}{\PYZhy{}} \PY{n}{ly}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZgt{}} \PY{n}{lx}\PY{o}{*}\PY{n}{ly}\PY{o}{/}\PY{l+m+mi}{4}
+         \PY{n}{lena}\PY{p}{[}\PY{n}{mask}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{lena}\PY{p}{[}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} (-0.5, 511.5, 511.5, -0.5)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_109_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Geometric Transformations}\label{geometric-transformations}
+
+    We can easily rotate and flip the image using the \texttt{numpy}
+library.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k+kn}{import} \PY{n}{ndimage}
+         
+         \PY{n}{lena} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{lena}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lx}\PY{p}{,} \PY{n}{ly} \PY{o}{=} \PY{n}{lena}\PY{o}{.}\PY{n}{shape}
+         
+         \PY{c}{\PYZsh{} Cropping}
+         
+         \PY{n}{crop\PYZus{}lena} \PY{o}{=} \PY{n}{lena}\PY{p}{[}\PY{n}{lx}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{n}{lx}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{ly}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{n}{ly}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{]}
+         \PY{c}{\PYZsh{} up \PYZlt{}\PYZhy{}\PYZgt{} down flip}
+         \PY{n}{flip\PYZus{}ud\PYZus{}lena} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flipud}\PY{p}{(}\PY{n}{lena}\PY{p}{)}
+         \PY{c}{\PYZsh{} rotation}
+         \PY{n}{rotate\PYZus{}lena} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{rotate}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{l+m+mi}{45}\PY{p}{)}
+         \PY{n}{rotate\PYZus{}lena\PYZus{}noreshape} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{rotate}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{l+m+mi}{45}\PY{p}{,} \PY{n}{reshape}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{12.5}\PY{p}{,} \PY{l+m+mf}{2.5}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{151}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{152}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{crop\PYZus{}lena}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{153}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{flip\PYZus{}ud\PYZus{}lena}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{154}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{rotate\PYZus{}lena}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{155}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{rotate\PYZus{}lena\PYZus{}noreshape}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bottom}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                             \PY{n}{right}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_112_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Image Filtering}\label{image-filtering}
+
+    We can filter images by replacing the value of the pixels by a function
+of adjacent pixels. In the example below we use two different filters.
+The Gaussian filter sets the value of a pixel to the weighted average of
+the value of neighboring pixels, where nearby pixels have greater
+weights. The uniform filter is simply the average value of the pixels a
+set distance away.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{lena} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{lena}\PY{p}{(}\PY{p}{)}
+         \PY{n}{blurred\PYZus{}lena} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{gaussian\PYZus{}filter}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{very\PYZus{}blurred} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{gaussian\PYZus{}filter}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{local\PYZus{}mean} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{uniform\PYZus{}filter}\PY{p}{(}\PY{n}{lena}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{131}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{blurred\PYZus{}lena}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{132}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{very\PYZus{}blurred}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{133}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{local\PYZus{}mean}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.99}\PY{p}{,} \PY{n}{bottom}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,}
+                             \PY{n}{left}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{l+m+mf}{0.99}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_115_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Image Sharpening}\label{image-sharpening}
+
+    We can also sharpen a blurred image. The following shows the original
+image followed by a blurred image and a resharpened image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{l} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{lena}\PY{p}{(}\PY{p}{)}
+         \PY{n}{blurred\PYZus{}l} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{gaussian\PYZus{}filter}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{n}{filter\PYZus{}blurred\PYZus{}l} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{gaussian\PYZus{}filter}\PY{p}{(}\PY{n}{blurred\PYZus{}l}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{30}
+         \PY{n}{sharpened} \PY{o}{=} \PY{n}{blurred\PYZus{}l} \PY{o}{+} \PY{n}{alpha} \PY{o}{*} \PY{p}{(}\PY{n}{blurred\PYZus{}l} \PY{o}{\PYZhy{}} \PY{n}{filter\PYZus{}blurred\PYZus{}l}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{131}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{132}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{blurred\PYZus{}l}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{133}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{sharpened}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} (-0.5, 511.5, 511.5, -0.5)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_118_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Denoising}\label{denoising}
+
+    Applying the filters we learned to help us blur and sharpen images allow
+us to denoise an image. However, these filters are not without problems.
+The Gaussian filter smoothes out the noise, but it also smoothes out the
+edges of the picture. A median picture smoothes the noise, but it
+preserves the edges better than the Gaussian filter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{l} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{lena}\PY{p}{(}\PY{p}{)}
+         \PY{n}{l} \PY{o}{=} \PY{n}{l}\PY{p}{[}\PY{l+m+mi}{230}\PY{p}{:}\PY{l+m+mi}{290}\PY{p}{,} \PY{l+m+mi}{220}\PY{p}{:}\PY{l+m+mi}{320}\PY{p}{]}
+         
+         \PY{n}{noisy} \PY{o}{=} \PY{n}{l} \PY{o}{+} \PY{l+m+mf}{0.4}\PY{o}{*}\PY{n}{l}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{l}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{n}{gauss\PYZus{}denoised} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{gaussian\PYZus{}filter}\PY{p}{(}\PY{n}{noisy}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{med\PYZus{}denoised} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{median\PYZus{}filter}\PY{p}{(}\PY{n}{noisy}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mf}{2.8}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{131}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{noisy}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{220}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{noisy}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{132}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{gauss\PYZus{}denoised}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{220}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Gaussian filter}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{133}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{med\PYZus{}denoised}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{220}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Median filter}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{n}{bottom}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                             \PY{n}{right}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_121_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The median filter is better when working with straight edges
+(low-curviture images).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{im} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{im}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{im} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{distance\PYZus{}transform\PYZus{}bf}\PY{p}{(}\PY{n}{im}\PY{p}{)}
+         \PY{n}{im\PYZus{}noise} \PY{o}{=} \PY{n}{im} \PY{o}{+} \PY{l+m+mf}{0.2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{o}{*}\PY{n}{im}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{n}{im\PYZus{}med} \PY{o}{=} \PY{n}{ndimage}\PY{o}{.}\PY{n}{median\PYZus{}filter}\PY{p}{(}\PY{n}{im\PYZus{}noise}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{141}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{nearest}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Original image}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{142}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im\PYZus{}noise}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{nearest}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Noisy image}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{143}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im\PYZus{}med}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{nearest}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Median filter}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{144}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{im} \PY{o}{\PYZhy{}} \PY{n}{im\PYZus{}med}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{hot}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{nearest}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{off}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Error}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{n}{bottom}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Visualization with Matplotlib_files/Visualization with Matplotlib_123_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Try It!}\label{try-it}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Try adding noise to the image \texttt{Lena}. Once you have a noisy
+  image try using a median and Gaussian filter to smooth the image.
+\item
+  Create an error chart to measure the error between the two techniques.
+\item
+  Try using a new filter like \texttt{ndimage.maximum\_filter}, and
+  \texttt{ndimage.percentile\_filter} on the image of concentric
+  squares.
+\item
+  Try using a non-rank filter like \texttt{scipy.signal.wiener}.
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,17 @@
+[
+    {
+        "text": "Home",
+        "url": "/",
+        "icon": "fa-home"
+    },
+    {
+        "text": "LaTeX",
+        "url": "/courses/latex/",
+        "icon": "fa-code"
+    },
+    {
+        "text": "Material",
+        "url": "/courses/latex/material/",
+        "icon": "fa-th-list"
+    }
+]

@@ -1,0 +1,1656 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Case Studies and Applications}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Financial and Economic Data
+Applications}\label{financial-and-economic-data-applications}
+
+    In this final lecture, we will look at a number of useful applications
+of the techniques discussed in previous weeks. These all come from the
+worlds of finance and economics, mostly because of the abundance of
+data. We will also be using Wes McKinney's template \texttt{.ipynb} file
+as a skeleton for the lectures.
+
+Throughout, we will make use of some technical jargon. Here are frequent
+terms that you should be familiar with:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \emph{cross-sectional} data: data that comprise a fixed point in time
+  (for example, the current closing price of publicly traded companies
+  on April 1 2015).
+\item
+  \emph{panel} data: multi-dimensional data, which frequently involve
+  time series measurements but can also be cross-sectional.
+\item
+  \emph{futures contract}: a financial instrument in which two parties
+  agree to the sale of a distinct instrument (such as corn, oil, or a
+  stock) sometime into the future, thereby deriving its value from the
+  value of an underlying asset. As such, it is a form of
+  \emph{derivative} contract.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k+kn}{import} \PY{n}{division}
+        \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k+kn}{import} \PY{n}{Series}\PY{p}{,} \PY{n}{DataFrame}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{numpy.random} \PY{k+kn}{import} \PY{n}{randn}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{12}
+        \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{suppress}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+    \subsection{Data munging topics}\label{data-munging-topics}
+
+    In previous lectures we have discussed a number of useful tools that are
+present within the Python data analysis ecosystem for data munging. Here
+we will overview a few of these tools in action.
+
+    \subsubsection{Time series and cross-section
+alignment}\label{time-series-and-cross-section-alignment}
+
+    Suppose you are given two different financial datasets on which you hope
+to perform a reasonable analysis. More likely than not, the series may
+have indices that don't line up perfectly, or (if the data is stored
+into a \texttt{DataFrame}) might have columns or row labels that don't
+match.
+
+This is a terribly frequent and frustrating problem in data analysis, so
+much so that it has its own name: the \emph{data alignment problem}. In
+\texttt{Pandas}, basic arithmetic operations between data sets performs
+automatic alignment. For example, let us consider the following
+datasets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{close\PYZus{}px} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ch11/stock\PYZus{}px.csv}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{volume} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ch11/volume.csv}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{prices} \PY{o}{=} \PY{n}{close\PYZus{}px}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}09\PYZhy{}05}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}09\PYZhy{}14}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{AAPL}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{JNJ}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{SPX}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{XOM}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{volume} \PY{o}{=} \PY{n}{volume}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}09\PYZhy{}05}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}09\PYZhy{}12}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{AAPL}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{JNJ}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{XOM}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{prices}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}               AAPL    JNJ      SPX    XOM
+        2011-09-06  379.74  64.64  1165.24  71.15
+        2011-09-07  383.93  65.43  1198.62  73.65
+        2011-09-08  384.14  64.95  1185.90  72.82
+        2011-09-09  377.48  63.64  1154.23  71.01
+        2011-09-12  379.94  63.59  1162.27  71.84
+        2011-09-13  384.62  63.61  1172.87  71.65
+        2011-09-14  389.30  63.73  1188.68  72.64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{volume}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                 AAPL       JNJ       XOM
+        2011-09-06  18173500  15848300  25416300
+        2011-09-07  12492000  10759700  23108400
+        2011-09-08  14839800  15551500  22434800
+        2011-09-09  20171900  17008200  27969100
+        2011-09-12  16697300  13448200  26205800
+\end{Verbatim}
+        
+    One useful metric in the financial analysis of stock prices is the
+\emph{volume-weighted average price}, or VWAP, of a stock. This metric
+weights the price of a stock at any given time by the amount of trades
+are occurring at that time. The idea is that high-volume trades give a
+better indication of the perceptions of institutional investors, who
+presumably have expert understanding, of the value of the stock.
+
+Since \texttt{Pandas} aligns the data automatically and excludes missing
+data in functions like \texttt{sum}, we can express this concisely as:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{prices} \PY{o}{*} \PY{n}{volume}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}                   AAPL         JNJ  SPX         XOM
+        2011-09-06  6901204890  1024434112  NaN  1808369745
+        2011-09-07  4796053560   704007171  NaN  1701933660
+        2011-09-08  5700560772  1010069925  NaN  1633702136
+        2011-09-09  7614488812  1082401848  NaN  1986085791
+        2011-09-12  6343972162   855171038  NaN  1882624672
+        2011-09-13         NaN         NaN  NaN         NaN
+        2011-09-14         NaN         NaN  NaN         NaN
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{vwap} \PY{o}{=} \PY{p}{(}\PY{n}{prices} \PY{o}{*} \PY{n}{volume}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{volume}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{vwap}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} AAPL    380.655181
+        JNJ      64.394769
+        SPX            NaN
+        XOM      72.024288
+        dtype: float64
+\end{Verbatim}
+        
+    Because no volume data is given for the SPX exchange-traded fund, the
+VWAP value for the asset is consequently absent. We can remove it from
+the above series by a simple call to \texttt{dropna}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{vwap}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} AAPL    380.655181
+        JNJ      64.394769
+        XOM      72.024288
+        dtype: float64
+\end{Verbatim}
+        
+    Manual alignment can be achieved by using the \texttt{align} method
+built-in to \texttt{DataFrame} objects.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{prices}\PY{o}{.}\PY{n}{align}\PY{p}{(}\PY{n}{volume}\PY{p}{,} \PY{n}{join}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{inner}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} (              AAPL    JNJ    XOM
+          2011-09-06  379.74  64.64  71.15
+          2011-09-07  383.93  65.43  73.65
+          2011-09-08  384.14  64.95  72.82
+          2011-09-09  377.48  63.64  71.01
+          2011-09-12  379.94  63.59  71.84,                 AAPL       JNJ       XOM
+          2011-09-06  18173500  15848300  25416300
+          2011-09-07  12492000  10759700  23108400
+          2011-09-08  14839800  15551500  22434800
+          2011-09-09  20171900  17008200  27969100
+          2011-09-12  16697300  13448200  26205800)
+\end{Verbatim}
+        
+    You can also build \texttt{DataFrame} objects with \texttt{Series}
+objects that may potentially have different individual shapes without a
+hitch, because of \texttt{Pandas} automatic alignment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{s1} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{s2} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{e}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{s3} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{f}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{s1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{s2}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{three}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{s3}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}    one  three  two
+         a    0      1  NaN
+         b    1    NaN    1
+         c    2      2    2
+         d  NaN    NaN    0
+         e  NaN    NaN    3
+         f  NaN      0  NaN
+\end{Verbatim}
+        
+    Again, \texttt{NaN} is assigned to values for which the original
+\texttt{Series} do not cover respectively.
+
+You can specify explicitly the index of the result, discarding the rest:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{one}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{s1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{two}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{s2}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{three}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{s3}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{face}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}    one  three  two
+         f  NaN      0  NaN
+         a    0      1  NaN
+         c    2      2    2
+         e  NaN    NaN    3
+\end{Verbatim}
+        
+    \subsubsection{Operations with time series of different
+frequencies}\label{operations-with-time-series-of-different-frequencies}
+
+    The Federal Reserve publishes new GDP data every quarter, but only
+publishes inflation data annually. Publicly listed firms are required to
+provide income and balance sheet data quarterly, but it need not happen
+at the same day for every company. These types of problems for data
+analysts fall under the category of time series frequency problems, and
+\texttt{Pandas} provides a number of techniques for solving them.
+
+Suppose you have a time series that contains data compiled weekly (on
+Wednesdays):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{ts1} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                      \PY{n}{index}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}13}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{W\PYZhy{}WED}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ts1}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 2012-06-13    2.532694
+         2012-06-20   -0.288329
+         2012-06-27    1.191570
+         Freq: W-WED, dtype: float64
+\end{Verbatim}
+        
+    In certain circumstances, it might be useful to resample the data to
+different frequencies. For example, if you need to resample the data so
+that an entry is provided for every business day in the period, you can
+employ:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{ts1}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 2012-06-13    2.532694
+         2012-06-14         NaN
+         2012-06-15         NaN
+         2012-06-18         NaN
+         2012-06-19         NaN
+         2012-06-20   -0.288329
+         2012-06-21         NaN
+         2012-06-22         NaN
+         2012-06-25         NaN
+         2012-06-26         NaN
+         2012-06-27    1.191570
+         Freq: B, dtype: float64
+\end{Verbatim}
+        
+    Notice here that because no new information is provided, all of the new
+dates are simply left \texttt{NaN}. If you want to fill these gaps with
+prevous data, you can apply various fillers with the
+\texttt{fill\_method} parameter specified.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{ts1}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{ffill}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 2012-06-13    2.532694
+         2012-06-14    2.532694
+         2012-06-15    2.532694
+         2012-06-18    2.532694
+         2012-06-19    2.532694
+         2012-06-20   -0.288329
+         2012-06-21   -0.288329
+         2012-06-22   -0.288329
+         2012-06-25   -0.288329
+         2012-06-26   -0.288329
+         2012-06-27    1.191570
+         Freq: B, dtype: float64
+\end{Verbatim}
+        
+    This remedy is an elegant solution to upsampling from lower frequency
+data to higher frequency data, but another class of frequency problems
+involve irregular time series data, in which the above methods will not
+work as neatly. Consider the following data set containing irregularly
+sampled data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{dates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DatetimeIndex}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}12}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}17}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}18}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                   \PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}21}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}22}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}6\PYZhy{}29}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ts2} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{dates}\PY{p}{)}
+         \PY{n}{ts2}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 2012-06-12    1.175068
+         2012-06-17    0.595031
+         2012-06-18    0.106952
+         2012-06-21   -0.165089
+         2012-06-22   -0.187681
+         2012-06-29    0.312908
+         dtype: float64
+\end{Verbatim}
+        
+    If you want to add the ``as of'' values in \texttt{ts1} to \texttt{ts2},
+one option would be to resample both to a regular frequency and then
+add, but if you want to maintain the date index in \texttt{ts2}, using
+\texttt{reindex} is a more precise solution:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{ts1}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{ts2}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{ffill}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 2012-06-12         NaN
+         2012-06-17    2.532694
+         2012-06-18    2.532694
+         2012-06-21   -0.288329
+         2012-06-22   -0.288329
+         2012-06-29    1.191570
+         dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{ts2} \PY{o}{+} \PY{n}{ts1}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{ts2}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{ffill}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 2012-06-12         NaN
+         2012-06-17    3.127724
+         2012-06-18    2.639646
+         2012-06-21   -0.453418
+         2012-06-22   -0.476010
+         2012-06-29    1.504478
+         dtype: float64
+\end{Verbatim}
+        
+    \paragraph{Using periods instead of
+timestamps}\label{using-periods-instead-of-timestamps}
+
+    Periods, as opposed to timestamps, are another common approach to
+organizing time series data, which can lead to its own time series
+frequency problems. Suppose you have the following GDP and inflation
+data, which are both periodic but at different frequencies:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{gdp} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.78}\PY{p}{,} \PY{l+m+mf}{1.94}\PY{p}{,} \PY{l+m+mf}{2.08}\PY{p}{,} \PY{l+m+mf}{2.01}\PY{p}{,} \PY{l+m+mf}{2.15}\PY{p}{,} \PY{l+m+mf}{2.31}\PY{p}{,} \PY{l+m+mf}{2.46}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{index}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{period\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{1984Q2}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Q\PYZhy{}SEP}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{infl} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.025}\PY{p}{,} \PY{l+m+mf}{0.045}\PY{p}{,} \PY{l+m+mf}{0.037}\PY{p}{,} \PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{index}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{period\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{1982}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{A\PYZhy{}DEC}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{gdp}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 1984Q2    1.78
+         1984Q3    1.94
+         1984Q4    2.08
+         1985Q1    2.01
+         1985Q2    2.15
+         1985Q3    2.31
+         1985Q4    2.46
+         Freq: Q-SEP, dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{infl}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 1982    0.025
+         1983    0.045
+         1984    0.037
+         1985    0.040
+         Freq: A-DEC, dtype: float64
+\end{Verbatim}
+        
+    In \texttt{Pandas}, unlike with timestamps, operations between
+different-frequency time series that are indexed by periods are not
+possible without explicit conversions. In this case, if we know that
+\texttt{infl} values were observed at the end of the year, we can then
+convert to \texttt{Q-SEP} to get the right periods in that frequency:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{infl\PYZus{}q} \PY{o}{=} \PY{n}{infl}\PY{o}{.}\PY{n}{asfreq}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Q\PYZhy{}SEP}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{end}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{infl\PYZus{}q}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 1983Q1    0.025
+         1984Q1    0.045
+         1985Q1    0.037
+         1986Q1    0.040
+         Freq: Q-SEP, dtype: float64
+\end{Verbatim}
+        
+    Then, we can simply reindex the inflation time series data with a
+forward-filling method to match the GDP data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{infl\PYZus{}q}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{gdp}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{ffill}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 1984Q2    0.045
+         1984Q3    0.045
+         1984Q4    0.045
+         1985Q1    0.037
+         1985Q2    0.037
+         1985Q3    0.037
+         1985Q4    0.037
+         Freq: Q-SEP, dtype: float64
+\end{Verbatim}
+        
+    \subsubsection{Time of day and ``as of'' data
+selection}\label{time-of-day-and-as-of-data-selection}
+
+    Suppose you have a long time series containing intraday market data and
+you want to extract the prices at a particular time of day on each day
+of the data. What if the data are irregular such that observations do
+not fall exactly on the desired time? In practice this task can make for
+error-prone data munging if you are not careful. Here is an example for
+illustration purposes:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c}{\PYZsh{} Make an intraday date range and time series}
+         \PY{n}{rng} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}01 09:30}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}01 15:59}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{T}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{c}{\PYZsh{} Make a 5\PYZhy{}day series of 9:30\PYZhy{}15:59 values}
+         \PY{n}{rng} \PY{o}{=} \PY{n}{rng}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{rng} \PY{o}{+} \PY{n}{pd}\PY{o}{.}\PY{n}{offsets}\PY{o}{.}\PY{n}{BDay}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ts} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{rng}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{rng}\PY{p}{)}
+         \PY{n}{ts}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 2012-06-01 09:30:00       0
+         2012-06-01 09:31:00       1
+         2012-06-01 09:32:00       2
+         2012-06-01 09:33:00       3
+         2012-06-01 09:34:00       4
+         2012-06-01 09:35:00       5
+                                {\ldots} 
+         2012-06-06 15:54:00    1554
+         2012-06-06 15:55:00    1555
+         2012-06-06 15:56:00    1556
+         2012-06-06 15:57:00    1557
+         2012-06-06 15:58:00    1558
+         2012-06-06 15:59:00    1559
+         dtype: float64
+\end{Verbatim}
+        
+    We can index \texttt{ts} with a \texttt{datetime.time} object to extract
+the values at 10:00 AM throughout the entire time series.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k+kn}{import} \PY{n}{time}
+         \PY{n}{ts}\PY{p}{[}\PY{n}{time}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 2012-06-01 10:00:00      30
+         2012-06-04 10:00:00     420
+         2012-06-05 10:00:00     810
+         2012-06-06 10:00:00    1200
+         dtype: float64
+\end{Verbatim}
+        
+    Alternatively, you can specify timestamps between two time intervals,
+such as 10:00 AM and 10:01 AM (inclusively).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{ts}\PY{o}{.}\PY{n}{between\PYZus{}time}\PY{p}{(}\PY{n}{time}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{time}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 2012-06-01 10:00:00      30
+         2012-06-01 10:01:00      31
+         2012-06-04 10:00:00     420
+         2012-06-04 10:01:00     421
+         2012-06-05 10:00:00     810
+         2012-06-05 10:01:00     811
+         2012-06-06 10:00:00    1200
+         2012-06-06 10:01:00    1201
+         dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12346}\PY{p}{)}
+\end{Verbatim}
+
+    However, it could be the case that no data actually fell exactly at
+10:00 AM, but you might want to know the last known value at 10:00. In
+that case, you might do something like the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c}{\PYZsh{} Set most of the time series randomly to NA}
+         \PY{n}{indexer} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ts}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{700}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{irr\PYZus{}ts} \PY{o}{=} \PY{n}{ts}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{irr\PYZus{}ts}\PY{p}{[}\PY{n}{indexer}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+         \PY{n}{irr\PYZus{}ts}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}01 09:50}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}01 10:00}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 2012-06-01 09:50:00    20
+         2012-06-01 09:51:00   NaN
+         2012-06-01 09:52:00    22
+         2012-06-01 09:53:00    23
+         2012-06-01 09:54:00   NaN
+         2012-06-01 09:55:00    25
+         2012-06-01 09:56:00   NaN
+         2012-06-01 09:57:00   NaN
+         2012-06-01 09:58:00   NaN
+         2012-06-01 09:59:00   NaN
+         2012-06-01 10:00:00   NaN
+         dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{selection} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}01 10:00}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{irr\PYZus{}ts}\PY{o}{.}\PY{n}{asof}\PY{p}{(}\PY{n}{selection}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 2012-06-01 10:00:00      25
+         2012-06-04 10:00:00     420
+         2012-06-05 10:00:00     810
+         2012-06-06 10:00:00    1197
+         Freq: B, dtype: float64
+\end{Verbatim}
+        
+    The \texttt{asof} method performs this functionality for you.
+
+    \subsubsection{Splicing together data
+sources}\label{splicing-together-data-sources}
+
+    In financial and economic contexts, there are a number of widely
+occurring use cases of merging related datasets:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Switching from one data source to another at a specific point in time
+\item
+  ``Patching'' missing values in a time series at the beginning, middle,
+  or end using another time series
+\item
+  Completely replacing the data for a subset of symbols
+\end{itemize}
+
+In the first case, switching from one set of time series to another at a
+specific instant, it is a matter of splicing together two
+\texttt{TimeSeries} or \texttt{DataFrame} objects using
+\texttt{pandas.concat}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{data1} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                           \PY{n}{index}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{6/12/2012}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{data2} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,}
+                           \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                           \PY{n}{index}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{6/13/2012}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{spliced} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data1}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}14}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data2}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}15}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{spliced}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}             a  b  c
+         2012-06-12  1  1  1
+         2012-06-13  1  1  1
+         2012-06-14  1  1  1
+         2012-06-15  2  2  2
+         2012-06-16  2  2  2
+         2012-06-17  2  2  2
+         2012-06-18  2  2  2
+\end{Verbatim}
+        
+    Suppose in a similar example that \texttt{data1} was missing a time
+series present in \texttt{data2}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{data2} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,}
+                           \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{d}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                           \PY{n}{index}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{6/13/2012}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{spliced} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data1}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}14}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data2}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}06\PYZhy{}15}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{spliced}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}             a  b  c   d
+         2012-06-12  1  1  1 NaN
+         2012-06-13  1  1  1 NaN
+         2012-06-14  1  1  1 NaN
+         2012-06-15  2  2  2   2
+         2012-06-16  2  2  2   2
+         2012-06-17  2  2  2   2
+         2012-06-18  2  2  2   2
+\end{Verbatim}
+        
+    Using \texttt{combine\_first}, you can bring in data from before the
+splice point to extend the history for \texttt{d} item:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{spliced\PYZus{}filled} \PY{o}{=} \PY{n}{spliced}\PY{o}{.}\PY{n}{combine\PYZus{}first}\PY{p}{(}\PY{n}{data2}\PY{p}{)}
+         \PY{n}{spliced\PYZus{}filled}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}             a  b  c   d
+         2012-06-12  1  1  1 NaN
+         2012-06-13  1  1  1   2
+         2012-06-14  1  1  1   2
+         2012-06-15  2  2  2   2
+         2012-06-16  2  2  2   2
+         2012-06-17  2  2  2   2
+         2012-06-18  2  2  2   2
+\end{Verbatim}
+        
+    Since there isn't any data for \texttt{d} at 2012-06-12 in
+\texttt{data2}, the entry receives an \texttt{NaN}.
+
+The \texttt{update} method for \texttt{DataFrame} objects performs
+in-place updates to the data. To fill in only holes in the data, pass in
+\texttt{overwrite=False}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{spliced}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{data2}\PY{p}{,} \PY{n}{overwrite}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{spliced}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}             a  b  c   d
+         2012-06-12  1  1  1 NaN
+         2012-06-13  1  1  1   2
+         2012-06-14  1  1  1   2
+         2012-06-15  2  2  2   2
+         2012-06-16  2  2  2   2
+         2012-06-17  2  2  2   2
+         2012-06-18  2  2  2   2
+\end{Verbatim}
+        
+    You can also perform data replacement on any subset of symbols. Below,
+this is used to fill in values for specific columns:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{cp\PYZus{}spliced} \PY{o}{=} \PY{n}{spliced}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cp\PYZus{}spliced}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{data1}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{cp\PYZus{}spliced}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}              a  b   c   d
+         2012-06-12   1  1   1 NaN
+         2012-06-13   1  1   1   2
+         2012-06-14   1  1   1   2
+         2012-06-15   1  2   1   2
+         2012-06-16   1  2   1   2
+         2012-06-17   1  2   1   2
+         2012-06-18 NaN  2 NaN   2
+\end{Verbatim}
+        
+    \subsubsection{Return indexes and cumulative
+returns}\label{return-indexes-and-cumulative-returns}
+
+    The return of a financial asset is defined as the cumulative percent
+change in its price.
+
+Here is some price data for Apple, Inc.:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{k+kn}{import} \PY{n+nn}{pandas.io.data} \PY{k+kn}{as} \PY{n+nn}{web}
+         \PY{n}{price} \PY{o}{=} \PY{n}{web}\PY{o}{.}\PY{n}{get\PYZus{}data\PYZus{}yahoo}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{AAPL}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}01\PYZhy{}01}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Adj Close}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{price}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} Date
+         2015-07-13    125.660004
+         2015-07-14    125.610001
+         2015-07-15    126.820000
+         2015-07-16    128.509995
+         2015-07-17    129.619995
+         Name: Adj Close, dtype: float64
+\end{Verbatim}
+        
+    Apple does not pay dividends, which would otherwise be included into the
+calculation of net returns. Thus, a quick-and-dirty computation of
+returns will suffice:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{price}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}10\PYZhy{}03}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{price}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2011\PYZhy{}3\PYZhy{}01}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 0.072399969339113746
+\end{Verbatim}
+        
+    Stocks with dividend payments complicate the computation because you
+have to factor in the stream of payments over time. The
+\texttt{Adj Close} attempts to adjust for stock splits and dividends,
+but in any case, it's quite common to derive a \emph{return index},
+which indicates the value of a dollar's investment into the asset. For
+Apple, let's compute a simple return index using \texttt{cumprod}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{returns} \PY{o}{=} \PY{n}{price}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ret\PYZus{}index} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{returns}\PY{p}{)}\PY{o}{.}\PY{n}{cumprod}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ret\PYZus{}index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}  \PY{c}{\PYZsh{} Set first value to 1}
+         \PY{n}{ret\PYZus{}index}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{grid}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f113c6fa050>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Case Studies and Applications_files/Case Studies and Applications_73_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    With a return index, we can manipulate the frequency at which we compute
+the returns quite easily.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{m\PYZus{}returns} \PY{o}{=} \PY{n}{ret\PYZus{}index}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{BM}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{last}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         \PY{n}{m\PYZus{}returns}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} Date
+         2012-01-31    0.127111
+         2012-02-29    0.188311
+         2012-03-30    0.105284
+         2012-04-30   -0.025970
+         2012-05-31   -0.010702
+         2012-06-29    0.010853
+         2012-07-31    0.045822
+         2012-08-31    0.093877
+         2012-09-28    0.002796
+         2012-10-31   -0.107600
+         2012-11-30   -0.012374
+         2012-12-31   -0.090743
+         Freq: BM, Name: Adj Close, dtype: float64
+\end{Verbatim}
+        
+    Since no dividends or other adjustments are considered, we could have
+alternatively computed from the daily percent changed by resampling with
+a simple aggregation:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{m\PYZus{}rets} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{returns}\PY{p}{)}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{M}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{prod}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{period}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+         \PY{n}{m\PYZus{}rets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} Date
+         2012-01    0.127111
+         2012-02    0.188311
+         2012-03    0.105284
+         2012-04   -0.025970
+         2012-05   -0.010702
+         2012-06    0.010853
+         2012-07    0.045822
+         2012-08    0.093877
+         2012-09    0.002796
+         2012-10   -0.107600
+         2012-11   -0.012374
+         2012-12   -0.090743
+         Freq: M, Name: Adj Close, dtype: float64
+\end{Verbatim}
+        
+    Then, to include the dividend payments you can simply add the separate
+dividend payment data as follows:
+
+\begin{verbatim}
+returns[dividend_dates] += dividend_pcts
+\end{verbatim}
+
+    \subsection{Group transforms and
+analysis}\label{group-transforms-and-analysis}
+
+    Let's consider a collection of made-up assets. We first generate a
+universe of 1000 tickers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}columns} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12345}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k+kn}{import} \PY{n+nn}{random}\PY{p}{;} \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{k+kn}{import} \PY{n+nn}{string}
+         
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{k}{def} \PY{n+nf}{rands}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{choices} \PY{o}{=} \PY{n}{string}\PY{o}{.}\PY{n}{ascii\PYZus{}uppercase}
+             \PY{k}{return} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{choices}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{xrange}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{tickers} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{rands}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{xrange}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    Then, we can create a \texttt{DataFrame} containing three columns
+representing random portfolios for a given subset of the above tickers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{M} \PY{o}{=} \PY{l+m+mi}{500}
+         \PY{n}{df} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{Momentum}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{M}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{200} \PY{o}{+} \PY{l+m+mf}{0.03}\PY{p}{,}
+                         \PY{l+s}{\PYZsq{}}\PY{l+s}{Value}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{M}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{200} \PY{o}{+} \PY{l+m+mf}{0.08}\PY{p}{,}
+                         \PY{l+s}{\PYZsq{}}\PY{l+s}{ShortInterest}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{M}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{200} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.02}\PY{p}{\PYZcb{}}\PY{p}{,}
+                         \PY{n}{index}\PY{o}{=}\PY{n}{tickers}\PY{p}{[}\PY{p}{:}\PY{n}{M}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}        Momentum  ShortInterest     Value
+         VTKGN  0.028976      -0.024918  0.076191
+         KUHMP  0.032395      -0.015345  0.078342
+         XNHTQ  0.027403      -0.024058  0.071243
+         GXZVX  0.027221      -0.029151  0.083144
+         ISXRM  0.039829      -0.020694  0.081413
+\end{Verbatim}
+        
+    We can aggregate these random tickers by industry. In this simple
+example, let's use two industries: financial and technology. We can
+store the mapping as a \texttt{Series} object.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{ind\PYZus{}names} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{FINANCIAL}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{TECH}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sampler} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ind\PYZus{}names}\PY{p}{)}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+         \PY{n}{industries} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{ind\PYZus{}names}\PY{p}{[}\PY{n}{sampler}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{tickers}\PY{p}{,}
+                             \PY{n}{name}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{industry}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    Using groupby mechanics, we can group \texttt{industries} and carry out
+group aggregation and transformations:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{by\PYZus{}industry} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{industries}\PY{p}{)}
+         \PY{n}{by\PYZus{}industry}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}            Momentum  ShortInterest     Value
+         industry                                    
+         FINANCIAL  0.029485      -0.020739  0.079929
+         TECH       0.030407      -0.019609  0.080113
+\end{Verbatim}
+        
+    Of course, remember the handy \texttt{describe} method:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{by\PYZus{}industry}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:}                    Momentum  ShortInterest       Value
+         industry                                              
+         FINANCIAL count  246.000000     246.000000  246.000000
+                   mean     0.029485      -0.020739    0.079929
+                   std      0.004802       0.004986    0.004548
+                   min      0.017210      -0.036997    0.067025
+                   25\%      0.026263      -0.024138    0.076638
+                   50\%      0.029261      -0.020833    0.079804
+                   75\%      0.032806      -0.017345    0.082718
+                   max      0.045884      -0.006322    0.093334
+         TECH      count  254.000000     254.000000  254.000000
+                   mean     0.030407      -0.019609    0.080113
+                   std      0.005303       0.005074    0.004886
+                   min      0.016778      -0.032682    0.065253
+                   25\%      0.026456      -0.022779    0.076737
+                   50\%      0.030650      -0.019829    0.080296
+                   75\%      0.033602      -0.016923    0.083353
+                   max      0.049638      -0.003698    0.093081
+\end{Verbatim}
+        
+    We can transform these portfolios along a particular industry by
+defining customized transformation functions. For example, standardizing
+within industry is widely used in equity portfolio research:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c}{\PYZsh{} Within\PYZhy{}Industry Standardize}
+         \PY{k}{def} \PY{n+nf}{zscore}\PY{p}{(}\PY{n}{group}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{(}\PY{n}{group} \PY{o}{\PYZhy{}} \PY{n}{group}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{group}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}stand} \PY{o}{=} \PY{n}{by\PYZus{}industry}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{zscore}\PY{p}{)}
+\end{Verbatim}
+
+    You can verify that each industry has mean (very nearly) 0 and standard
+deviation 1:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{df\PYZus{}stand}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{industries}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{mean}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{std}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:}                Momentum     ShortInterest             Value    
+                            mean std          mean std          mean std
+         industry                                                       
+         FINANCIAL  1.114736e-15   1  3.081772e-15   1  8.001278e-15   1
+         TECH      -2.779929e-16   1 -1.910982e-15   1 -7.139521e-15   1
+\end{Verbatim}
+        
+    Other, built-in kinds of transforms, such as \texttt{rank}, can be used
+to make the analysis more concise.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c}{\PYZsh{} Within\PYZhy{}industry rank descending}
+         \PY{n}{ind\PYZus{}rank} \PY{o}{=} \PY{n}{by\PYZus{}industry}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{n}{ind\PYZus{}rank}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{industries}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{min}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{max}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:}           Momentum      ShortInterest      Value     
+                        min  max           min  max   min  max
+         industry                                             
+         FINANCIAL        1  246             1  246     1  246
+         TECH             1  254             1  254     1  254
+\end{Verbatim}
+        
+    In quantitative equity, ``rank and standardize'' is a common sequence of
+transformations. You can compose these operations concisely with a
+well-placed lambda, as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c}{\PYZsh{} Industry rank and standardize}
+         \PY{n}{by\PYZus{}industry}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{zscore}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:}        Momentum  ShortInterest     Value
+         VTKGN -0.091346      -0.976696 -1.004802
+         KUHMP  0.794005       1.299919 -0.358356
+         XNHTQ -0.541047      -0.836164 -1.679355
+         GXZVX -0.583207      -1.623142  0.990749
+         ISXRM  1.572120      -0.265423  0.374314
+\end{Verbatim}
+        
+    \subsubsection{Group factor exposures}\label{group-factor-exposures}
+
+    Quantitative portfolio management takes heavy advantage of \emph{factor
+analysis}. From {[}Wikipedia{]}{[}1{]}:
+
+\begin{quote}
+Factor analysis is a statistical method used to describe variability
+among observed, correlated variables in terms of a potentially lower
+number of unobserved variables called factors. For example, it is
+possible that variations in four observed variables mainly reflect the
+variations in two unobserved variables. Factor analysis searches for
+such joint variations in response to unobserved latent variables.
+\end{quote}
+
+Portfolio holdings and performance are decomposed using one or more
+factors represented as a portfolio of weights. A common example is a
+stock's \emph{beta}, which measures co-movement between a stock and a
+benchmark (like the S\&P 500). We can consider a contrived example of a
+portfolio constructed from three randomly-generated factors (usually
+called \emph{factor loadings}) and some weights: {[}1{]}:
+https://en.wikipedia.org/wiki/Factor\_analysis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k+kn}{from} \PY{n+nn}{numpy.random} \PY{k+kn}{import} \PY{n}{rand}
+         \PY{n}{fac1}\PY{p}{,} \PY{n}{fac2}\PY{p}{,} \PY{n}{fac3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{n}{ticker\PYZus{}subset} \PY{o}{=} \PY{n}{tickers}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{} Weighted sum of factors plus noise}
+         \PY{n}{port} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{l+m+mf}{0.7} \PY{o}{*} \PY{n}{fac1} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.2} \PY{o}{*} \PY{n}{fac2} \PY{o}{+} \PY{l+m+mf}{0.3} \PY{o}{*} \PY{n}{fac3} \PY{o}{+} \PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,}
+                       \PY{n}{index}\PY{o}{=}\PY{n}{ticker\PYZus{}subset}\PY{p}{)}
+         \PY{n}{factors} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{f1}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{fac1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{f2}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{fac2}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{f3}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{fac3}\PY{p}{\PYZcb{}}\PY{p}{,}
+                             \PY{n}{index}\PY{o}{=}\PY{n}{ticker\PYZus{}subset}\PY{p}{)}
+\end{Verbatim}
+
+    Vector correlations between each factor and the portfolio may not
+indicate too much:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{factors}\PY{o}{.}\PY{n}{corrwith}\PY{p}{(}\PY{n}{port}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} f1    0.402377
+         f2   -0.680980
+         f3    0.168083
+         dtype: float64
+\end{Verbatim}
+        
+    The standard method to compute factor exposure is by least squares
+regression. You can do so with a number of Python libraries, from
+\texttt{SciPy} and \texttt{NumPy} to more advanced libraries such as
+\texttt{statsmodels}. However, \texttt{Pandas} makes the process
+particularly easy with its \texttt{pandas.ols} method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{port}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{factors}\PY{p}{)}\PY{o}{.}\PY{n}{beta}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} f1           0.761789
+         f2          -1.208760
+         f3           0.289865
+         intercept    0.484477
+         dtype: float64
+\end{Verbatim}
+        
+    Compare these with the original factor weights that were provided above
+arbitrarily, and you will see that this regression performed
+considerably better than the \texttt{corrwith} results; we have almost
+completely recovered the weights. With \texttt{groupby} you can compute
+exposures industry by industry. To do so, encapsulate the regression
+method with a new function, such as:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k}{def} \PY{n+nf}{beta\PYZus{}exposure}\PY{p}{(}\PY{n}{chunk}\PY{p}{,} \PY{n}{factors}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{chunk}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{factors}\PY{p}{)}\PY{o}{.}\PY{n}{beta}
+\end{Verbatim}
+
+    Then, simply group by \texttt{industries} and apply the function,
+passing the \texttt{DataFrame} of factor loadings:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{by\PYZus{}ind} \PY{o}{=} \PY{n}{port}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{industries}\PY{p}{)}
+         \PY{n}{exposures} \PY{o}{=} \PY{n}{by\PYZus{}ind}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{beta\PYZus{}exposure}\PY{p}{,} \PY{n}{factors}\PY{o}{=}\PY{n}{factors}\PY{p}{)}
+         \PY{n}{exposures}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:}                  f1        f2        f3  intercept
+         industry                                          
+         FINANCIAL  0.790329 -1.182970  0.275624   0.455569
+         TECH       0.740857 -1.232882  0.303811   0.508188
+\end{Verbatim}
+        
+    \subsubsection{Decile and quartile
+analysis}\label{decile-and-quartile-analysis}
+
+    In many circumstances it is useful to break down data based on sample
+quantiles. For example, the performance of a stock portfolio could be
+separated into quartiles based on each stock's
+\href{https://en.wikipedia.org/wiki/Price\%E2\%80\%93earnings_ratio}{price-to-earnings
+ratio}. With \texttt{Pandas}, the method \texttt{pandas.qcut} combined
+with \texttt{groupby} makes this a straightforward task.
+
+Consider a simple trend following or \emph{momentum} strategy trading
+the S\&P 500 index via the SPY exchange-traded fund.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{import} \PY{n+nn}{pandas.io.data} \PY{k+kn}{as} \PY{n+nn}{web}
+         \PY{n}{data} \PY{o}{=} \PY{n}{web}\PY{o}{.}\PY{n}{get\PYZus{}data\PYZus{}yahoo}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{SPY}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2006\PYZhy{}01\PYZhy{}01}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 2401 entries, 2006-01-03 to 2015-07-17
+Data columns (total 6 columns):
+Open         2401 non-null float64
+High         2401 non-null float64
+Low          2401 non-null float64
+Close        2401 non-null float64
+Volume       2401 non-null int64
+Adj Close    2401 non-null float64
+dtypes: float64(5), int64(1)
+memory usage: 131.3 KB
+    \end{Verbatim}
+
+    We compute the daily returns and a function for transforming the returns
+into a trend signal formed by a lagged moving sum:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{px} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Adj Close}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{returns} \PY{o}{=} \PY{n}{px}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{to\PYZus{}index}\PY{p}{(}\PY{n}{rets}\PY{p}{)}\PY{p}{:}
+             \PY{n}{index} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{rets}\PY{p}{)}\PY{o}{.}\PY{n}{cumprod}\PY{p}{(}\PY{p}{)}
+             \PY{n}{first\PYZus{}loc} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{get\PYZus{}loc}\PY{p}{(}\PY{n}{index}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{first\PYZus{}loc}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{index}
+         
+         \PY{k}{def} \PY{n+nf}{trend\PYZus{}signal}\PY{p}{(}\PY{n}{rets}\PY{p}{,} \PY{n}{lookback}\PY{p}{,} \PY{n}{lag}\PY{p}{)}\PY{p}{:}
+             \PY{n}{signal} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{rolling\PYZus{}sum}\PY{p}{(}\PY{n}{rets}\PY{p}{,} \PY{n}{lookback}\PY{p}{,} \PY{n}{min\PYZus{}periods}\PY{o}{=}\PY{n}{lookback} \PY{o}{\PYZhy{}} \PY{l+m+mi}{5}\PY{p}{)}
+             \PY{k}{return} \PY{n}{signal}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{n}{lag}\PY{p}{)}
+\end{Verbatim}
+
+    Using this function, we can create and test a trading strategy that
+trades this momentum signal every Friday:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{signal} \PY{o}{=} \PY{n}{trend\PYZus{}signal}\PY{p}{(}\PY{n}{returns}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{trade\PYZus{}friday} \PY{o}{=} \PY{n}{signal}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{W\PYZhy{}FRI}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{ffill}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trade\PYZus{}rets} \PY{o}{=} \PY{n}{trade\PYZus{}friday}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{returns}
+         \PY{n}{trade\PYZus{}rets} \PY{o}{=} \PY{n}{trade\PYZus{}rets}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{returns}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+    We can then convert the strategy returns to a return index and plot
+them:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{to\PYZus{}index}\PY{p}{(}\PY{n}{trade\PYZus{}rets}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{grid}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f110a4b6910>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Case Studies and Applications_files/Case Studies and Applications_118_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Caveat: this is a naive strategy!
+
+Suppose that you want to decompose the strategy performance into more
+and less volatile periods of trading. Trailing one-year annualized
+standard deviation is a simple measure of volatility, and we can compute
+\href{https://en.wikipedia.org/wiki/Sharpe_ratio}{Sharpe ratios} to
+assess the reward-to-risk ratio in various volatility regimes:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{vol} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{rolling\PYZus{}std}\PY{p}{(}\PY{n}{returns}\PY{p}{,} \PY{l+m+mi}{250}\PY{p}{,} \PY{n}{min\PYZus{}periods}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{250}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{sharpe}\PY{p}{(}\PY{n}{rets}\PY{p}{,} \PY{n}{ann}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{rets}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{rets}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}  \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ann}\PY{p}{)}
+\end{Verbatim}
+
+    Now we can divide \texttt{vol} into quartiles with \texttt{pd.qcut} and
+aggregating with \texttt{sharpe}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{cats} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{qcut}\PY{p}{(}\PY{n}{vol}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{cats: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s}{, trade\PYZus{}rets: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s}{, vol: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cats}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{trade\PYZus{}rets}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vol}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+cats: 2401, trade\_rets: 2401, vol: 2401
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{trade\PYZus{}rets}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{cats}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{sharpe}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} [0.0954, 0.115]    0.383027
+         (0.115, 0.17]      0.261718
+         (0.17, 0.217]     -0.016823
+         (0.217, 0.457]     0.456884
+         dtype: float64
+\end{Verbatim}
+        
+    These results show that the strategy performed the best during the
+period when the volatility was the highest.
+
+    \subsection{More example applications}\label{more-example-applications}
+
+    \subsubsection{Future contract rolling}\label{future-contract-rolling}
+
+    From \emph{Python for Data Analysis}:
+
+\begin{quote}
+In practice, modeling and trading futures contracts on equities,
+currencies, commodities, bonds, and other asset classes is complicated
+by the time-limited nature of each contract. For example, at any given
+time for a type of future (say silver or copper futures) multiple
+contracts with different \emph{expiration dates} may be traded. In many
+cases, the future contract expiring next (the \emph{near} contract) will
+be the most liquid (highest volume and lowest bid-ask spread.
+\end{quote}
+
+\begin{quote}
+For the purposes of modeling and forecasting, it can be much easier to
+work with a \emph{continuous} return index indicating the profit and
+loss associated with always holding the near contract. Transitioning
+from an expiring contract to the next (or \emph{far}) contract is
+referred to as \emph{rolling}. Computing a continuous future series from
+the individual contract data is not necessarily a straightforward
+exercise and typically requires a deeper understanding of the market and
+how the instruments are traded. For example, in practice when and how
+quickly would you trade out of an expiring contract and into the next
+contract?
+\end{quote}
+
+We will go into one way to do so. Using scaled prices for the SPY
+exchange-traded fund as a proxy for the S\&P 500, we have:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k+kn}{import} \PY{n+nn}{pandas.io.data} \PY{k+kn}{as} \PY{n+nn}{web}
+         \PY{c}{\PYZsh{} Approximate price of S\PYZam{}P 500 index}
+         \PY{n}{px} \PY{o}{=} \PY{n}{web}\PY{o}{.}\PY{n}{get\PYZus{}data\PYZus{}yahoo}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{SPY}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Adj Close}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{10}
+         \PY{n}{px}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} Date
+         2010-01-04    1014.45015
+         2010-01-05    1017.13549
+         2010-01-06    1017.85161
+         2010-01-07    1022.14826
+         2010-01-08    1025.54973
+                          {\ldots}    
+         2015-07-13    2097.59995
+         2015-07-14    2107.20001
+         2015-07-15    2106.30005
+         2015-07-16    2122.70004
+         2015-07-17    2124.70001
+         Name: Adj Close, dtype: float64
+\end{Verbatim}
+        
+    Now, a little bit of preamble. Let's put a couple of S\&P 500 future
+contracts and expiry dates in a \texttt{Series} object.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k+kn}{import} \PY{n}{datetime}
+         \PY{n}{expiry} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ESU2}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2012}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}\PY{p}{,}
+                   \PY{l+s}{\PYZsq{}}\PY{l+s}{ESZ2}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2012}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}\PY{p}{\PYZcb{}}
+         \PY{n}{expiry} \PY{o}{=} \PY{n}{Series}\PY{p}{(}\PY{n}{expiry}\PY{p}{)}\PY{o}{.}\PY{n}{order}\PY{p}{(}\PY{p}{)}
+         \PY{n}{expiry}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:} ESU2   2012-09-21
+         ESZ2   2012-12-21
+         dtype: datetime64[ns]
+\end{Verbatim}
+        
+    Using Yahoo! Finance prices and a random walk with noise, we can
+simulate the two contracts into the future.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12347}\PY{p}{)}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{200}
+         \PY{n}{walk} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{N}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{100}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.25}
+         \PY{n}{perturb} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{N}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{10}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.25}
+         \PY{n}{walk} \PY{o}{=} \PY{n}{walk}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{rng} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{n}{px}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{px}\PY{p}{)} \PY{o}{+} \PY{n}{N}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{near} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{px}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{px}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{walk}\PY{p}{]}\PY{p}{)}
+         \PY{n}{far} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{px}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{px}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{walk} \PY{o}{+} \PY{n}{perturb}\PY{p}{]}\PY{p}{)}
+         \PY{n}{prices} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ESU2}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{near}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{ESZ2}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{far}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{rng}\PY{p}{)}
+\end{Verbatim}
+
+    \texttt{prices} then has two time series for each contract that differ
+by a random amount.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{prices}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:}                   ESU2        ESZ2
+         2016-02-05  2153.95001  2155.70001
+         2016-02-08  2140.20001  2142.45001
+         2016-02-09  2148.20001  2149.95001
+         2016-02-10  2164.70001  2163.95001
+         2016-02-11  2144.70001  2142.45001
+\end{Verbatim}
+        
+    The technique that we will use to splice these two separate time series
+into a single continuous series is by constructing a weighting matrix.
+Active constraints have a weight of 1 until the expiry date gets close.
+At that point, we decide on a roll convention. Here is a function that
+computes a weighting matrix with linear decay:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}roll\PYZus{}weights}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{expiry}\PY{p}{,} \PY{n}{items}\PY{p}{,} \PY{n}{roll\PYZus{}periods}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{c}{\PYZsh{} start : first date to compute weighting DataFrame}
+             \PY{c}{\PYZsh{} expiry : Series of ticker \PYZhy{}\PYZgt{} expiration dates}
+             \PY{c}{\PYZsh{} items : sequence of contract names}
+         
+             \PY{n}{dates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{expiry}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{weights} \PY{o}{=} \PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dates}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{items}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                                 \PY{n}{index}\PY{o}{=}\PY{n}{dates}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{items}\PY{p}{)}
+         
+             \PY{n}{prev\PYZus{}date} \PY{o}{=} \PY{n}{weights}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{ex\PYZus{}date}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{expiry}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{expiry}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{:}
+                     \PY{n}{weights}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{prev\PYZus{}date}\PY{p}{:}\PY{n}{ex\PYZus{}date} \PY{o}{\PYZhy{}} \PY{n}{pd}\PY{o}{.}\PY{n}{offsets}\PY{o}{.}\PY{n}{BDay}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{n}{roll\PYZus{}rng} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{n}{end}\PY{o}{=}\PY{n}{ex\PYZus{}date} \PY{o}{\PYZhy{}} \PY{n}{pd}\PY{o}{.}\PY{n}{offsets}\PY{o}{.}\PY{n}{BDay}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{periods}\PY{o}{=}\PY{n}{roll\PYZus{}periods} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                     \PY{n}{decay\PYZus{}weights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{roll\PYZus{}periods} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                     \PY{n}{weights}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{roll\PYZus{}rng}\PY{p}{,} \PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{decay\PYZus{}weights}
+                     \PY{n}{weights}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{roll\PYZus{}rng}\PY{p}{,} \PY{n}{expiry}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{decay\PYZus{}weights}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{weights}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{prev\PYZus{}date}\PY{p}{:}\PY{p}{,} \PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+                 \PY{n}{prev\PYZus{}date} \PY{o}{=} \PY{n}{ex\PYZus{}date}
+         
+             \PY{k}{return} \PY{n}{weights}
+\end{Verbatim}
+
+    The weights look like this around the ESU2 expiry:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{weights} \PY{o}{=} \PY{n}{get\PYZus{}roll\PYZus{}weights}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{6/1/2012}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{expiry}\PY{p}{,} \PY{n}{prices}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{weights}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}09\PYZhy{}12}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{2012\PYZhy{}09\PYZhy{}21}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:}             ESU2  ESZ2
+         2012-09-12   1.0   0.0
+         2012-09-13   1.0   0.0
+         2012-09-14   0.8   0.2
+         2012-09-17   0.6   0.4
+         2012-09-18   0.4   0.6
+         2012-09-19   0.2   0.8
+         2012-09-20   0.0   1.0
+         2012-09-21   0.0   1.0
+\end{Verbatim}
+        
+    Finally, the rolled future returns are just a weighted sum of the
+contract returns:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{rolled\PYZus{}returns} \PY{o}{=} \PY{p}{(}\PY{n}{prices}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{n}{weights}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Rolling correlation and linear
+regression}\label{rolling-correlation-and-linear-regression}
+
+    From \emph{Python for Data Analysis}:
+
+\begin{quote}
+Dynamic models play an important role in financial modeling as they can
+be used to simulate trading decisions over a historical period. Moving
+window and exponentially-weighted time series functions are an example
+of tools that are used for dynamic models.
+\end{quote}
+
+\begin{quote}
+Correlation is one way to look at the co-movement between the changes in
+two asset time series. panda's \texttt{rolling\_corr} function can be
+called with two return series to compute the moving window correlation.
+\end{quote}
+
+First, let's load some stocks from Yahoo! Finance and compute the daily
+returns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{aapl} \PY{o}{=} \PY{n}{web}\PY{o}{.}\PY{n}{get\PYZus{}data\PYZus{}yahoo}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{AAPL}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2000\PYZhy{}01\PYZhy{}01}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Adj Close}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{msft} \PY{o}{=} \PY{n}{web}\PY{o}{.}\PY{n}{get\PYZus{}data\PYZus{}yahoo}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{MSFT}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2000\PYZhy{}01\PYZhy{}01}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Adj Close}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{aapl\PYZus{}rets} \PY{o}{=} \PY{n}{aapl}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         \PY{n}{msft\PYZus{}rets} \PY{o}{=} \PY{n}{msft}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    Then, compute and plot the one-year moving correlation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{rolling\PYZus{}corr}\PY{p}{(}\PY{n}{aapl\PYZus{}rets}\PY{p}{,} \PY{n}{msft\PYZus{}rets}\PY{p}{,} \PY{l+m+mi}{250}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{grid}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f110a12ab90>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Case Studies and Applications_files/Case Studies and Applications_145_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    To better capture the differences in volatility, we can use
+least-squares regression. OLS regression can model the dynamic
+relationship between a variable and one or more other predictor
+variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{aapl\PYZus{}rets}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{MSFT}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{n}{msft\PYZus{}rets}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{window}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{beta}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:}                 MSFT  intercept
+         Date                           
+         2000-12-28  0.429024  -0.002113
+         2000-12-29  0.421105  -0.001796
+         2001-01-02  0.420598  -0.001839
+         2001-01-03  0.433294  -0.001289
+         2001-01-04  0.432773  -0.001307
+         {\ldots}              {\ldots}        {\ldots}
+         2015-07-13  0.343578   0.001101
+         2015-07-14  0.357289   0.001168
+         2015-07-15  0.361721   0.001287
+         2015-07-16  0.362751   0.001259
+         2015-07-17  0.362994   0.001320
+         
+         [3659 rows x 2 columns]
+\end{Verbatim}
+        
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x7f110a24c750>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{model}\PY{o}{.}\PY{n}{beta}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{MSFT}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{grid}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f110a303c10>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Case Studies and Applications_files/Case Studies and Applications_148_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    There are of course more sophisticated techniques than OLS regression,
+which can be found in the
+\href{http://statsmodels.sourceforge.net}{\texttt{statsmodels}} project,
+but this gives a flavor for the kind of analysis that is possible.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
