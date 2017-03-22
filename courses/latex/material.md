@@ -4,34 +4,11 @@ suppress-title: false
 author: David Kraemer & Caleb Leedy
 date: March 01, 2015 
 layout: page
-show_meta: false
-sidebar: right
-sidebar-title: Course Links
-sidebar-content: |
-    <ul> 
-        <li> <a href="../">Main page</a> </li> 
-        <li> <a href="https://en.wikibooks.org/wiki/LaTeX">Wikibooks page</a> </li>
-        <li> <a href="latex-wikibook.pdf">Wikibooks PDF</a> </li>
-        <li> <a href="http://www.xm1math.net/texmaker/download.html">TexMaker</a> </li>
-        <li> <a href="http://www.sharelatex.com">ShareLaTeX</a> </li>
-        <li> <a href="http://www.overleaf.com">Overleaf</a> </li>
-    </ul>
-
-    <h3> Useful Links </h3>
-    <ul>
-        <li> <a href="http://faculty.cbu.ca/srodney/ShortSymbInd.pdf">Big list of math symbols</a> </li>    	
-        <li> <a href="http://detexify.kirelabs.org/classify.html">Detexify</a> </li>    	
-        <li> <a href="http://tex.stackexchange.com/">LaTeX StackExchange</a> </li>    	
-        <li> <a href="http://www.latextemplates.com/">Free templates</a> </li>    	
-        <li> <a href="https://www.sharelatex.com/learn">ShareLaTeX written guides</a> </li>    	
-        <li> <a href="https://www.youtube.com/user/ShareLaTeX/playlists">ShareLaTeX Youtube channel</a> </li>    	
-    </ul>
 permalink: courses/latex/material/
+urls: latex
 ...
 
 Each week's lecture slides (produced using Beamer) are given in the table below.
-
-<!-- <center> -->
 
 |       | Lecture | Date |
 |-------|:--------|-----:|
@@ -43,8 +20,6 @@ Each week's lecture slides (produced using Beamer) are given in the table below.
 |6|[Building a Resume][6]|November 27 2014|
 |7|[BibLaTeX][7]|December 4 2015|
 |8|[Beamer Presentations][8]|December 11 2015|
-
-<!-- </center> -->
 
 [1]: lecture-01.pdf
 [2]: lecture-02.pdf

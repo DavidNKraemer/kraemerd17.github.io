@@ -3,11 +3,9 @@ title: Course Material
 author: David Kraemer & Caleb Leedy
 date: March 01, 2015 
 layout: page
+urls: python
 permalink: courses/python/material/
 ...
-
-[Up one](../)
-
 
 |   | Lecture                    |              |            | Date        |
 |:--|:---------------------------|:------------:|:----------:|------------:|

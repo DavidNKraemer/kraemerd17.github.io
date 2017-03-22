@@ -8,12 +8,16 @@ permalink: /courses/
 Here are a list of current and previous courses taught through Grinnell
 College's Experimental College (ExCo) program.
 
-## Past Courses
+# Past Courses
 
-| **Date** | **Course Title** |
-|:-----|:-------------|
-| Fall 2014 | [Professional Typesetting with \\(\LaTeX\\)][1] |
-| Spring 2015 | [Data Analysis with Python][2] |
+## Spring 2015 
+
+[Data Analysis with Python][2]
+
+## Fall 2014  
+
+[Professional Typesetting with LaTeX][1]
+
 
 [1]: latex/
 [2]: python/

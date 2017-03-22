@@ -4,24 +4,14 @@ suppress-title: true
 author: David Kraemer & Caleb Leedy
 date: March 01, 2015 
 layout: page
-show_meta: false
-sidebar: right
-sidebar-title: Course Links
-sidebar-content: |
-    <ul> 
-        <li> <a href="material/">Course material</a> </li> 
-        <li> <a href="https://en.wikibooks.org/wiki/LaTeX">Wikibooks page</a> </li>
-        <li> <a href="material/latex-wikibook.pdf">Wikibooks PDF</a> </li>
-        <li> <a href="http://www.xm1math.net/texmaker/download.html">TexMaker</a> </li>
-        <li> <a href="http://www.sharelatex.com">ShareLaTeX</a> </li>
-        <li> <a href="http://www.overleaf.com">Overleaf</a> </li>
-    </ul>
+urls: latex
+
 permalink: courses/latex/
 ...
 
 # Introduction to Professional Typesetting with \\(\LaTeX\\)
 
-###### David Kraemer and Caleb Leedy
+**David Kraemer and Caleb Leedy**
 
 ### Course description
 
