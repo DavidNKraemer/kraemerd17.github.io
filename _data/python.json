@@ -1,0 +1,17 @@
+[
+    {
+        "text": "Home",
+        "url": "/",
+        "icon": "fa-home"
+    },
+    {
+        "text": "Python",
+        "url": "/courses/python/",
+        "icon": "fa-code"
+    },
+    {
+        "text": "Material",
+        "url": "/courses/python/material/",
+        "icon": "fa-th-list"
+    }
+]
