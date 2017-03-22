@@ -69,6 +69,10 @@ in European integration and economic policy, especially within the context of
 the Euro crisis. Frankly, I don't know why, but I find the topic quite thrilling
 to study.
 
+![Well this should be obvious to even the most dimwitted individual who holds an
+advanced degree in hyperbolic
+topology](https://frinkiac.com/meme/S07E06/1119234.jpg?b64lines=IFdlbGwsIHRoYXQgc2hvdWxkIGJlCiBvYnZpb3VzIHRvIGV2ZW4gdGhlIG1vc3QKIGRpbXdpdHRlZCBpbmRpdmlkdWFsCgoKCgoKCgogd2hvIGhvbGRzIGFuIGFkdmFuY2VkIApkZWdyZWUgaW4gaHlwZXJib2xpYyB0b3BvbG9neS4=)
+
 
 [1]: http://jupyter.org/
 
