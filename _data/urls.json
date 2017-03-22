@@ -24,11 +24,5 @@
         "text": "Blog",
         "url": "/blog/",
         "icon": "fa-rocket"
-    },
-    {
-        "text": "XML Feed",
-        "url": "/feed.xml",
-        "icon": "fa-feed",
-        "target": _blank
     }
 ]
