@@ -24,5 +24,10 @@
         "text": "Blog",
         "url": "/blog/",
         "icon": "fa-rocket"
+    },
+    {
+        "text": "Challah",
+        "url": "/challah/",
+        "icon": "fa-cutlery"
     }
 ]
