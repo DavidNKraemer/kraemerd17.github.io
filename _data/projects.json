@@ -19,5 +19,12 @@
 		"url": "https://github.com/kraemerd17/algorithm-benchmarking-analysis",
 		"date": "2016",
 		"tags": ["C","Scheme","Python"]
-	}
+	},
+        {
+                "name": "Conway's game of life",
+                "image": "placeholder.jpg",
+                "url": "https://github.com/blinderm/game-of-life",
+                "date": "2017",
+                "tags": ["C", "C++", "CUDA"]
+        }
 ]
