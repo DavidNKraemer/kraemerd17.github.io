@@ -5,7 +5,7 @@
         "icon": "fa-home"
     },
     {
-        "text": "LaTeX",
+        "text": "\\( \\LaTeX \\)",
         "url": "/courses/latex/",
         "icon": "fa-code"
     },
