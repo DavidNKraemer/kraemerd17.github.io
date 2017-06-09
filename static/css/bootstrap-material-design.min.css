@@ -13,7 +13,6 @@
 
 */
 
-
 body {
     background-color: #ffffff
 }
@@ -37,7 +36,7 @@ body.inverse .panel-default .form-control {
 .h1, .h2, .h3, .h4, body, h1, h2, h3,
 h4, h5, h6 {
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 300
+    font-weight: 400
 }
 
 h5,h6 {
@@ -49,8 +48,7 @@ a:hover {
     color: #990000;
 }
 a:hover {
-    font-weight: bold;
-    text-decoration: none
+    text-decoration: underline
 }
 
 a .material-icons,
@@ -194,7 +192,7 @@ body .container-fluid .well-danger {
 }
 .btn:not(.btn-raised).btn-info,
 .input-group-btn .btn:not(.btn-raised).btn-info {
-    color: #03a9f4
+    color: #d52027
 }
 .btn:not(.btn-raised).btn-warning,
 .input-group-btn .btn:not(.btn-raised).btn-warning {
@@ -255,7 +253,7 @@ body .container-fluid .well-danger {
 .btn.btn-raised.btn-success,
 .input-group-btn .btn.btn-fab.btn-success,
 .input-group-btn .btn.btn-raised.btn-success {
-    background-color: #4caf50;
+    background-color: #d52027;
     color: rgba(255, 255, 255, .84)
 }
 .btn-group-raised .btn.btn-info,
@@ -264,7 +262,7 @@ body .container-fluid .well-danger {
 .btn.btn-raised.btn-info,
 .input-group-btn .btn.btn-fab.btn-info,
 .input-group-btn .btn.btn-raised.btn-info {
-    background-color: #03a9f4;
+    background-color: #990000;
     color: rgba(255, 255, 255, .84)
 }
 .btn-group-raised .btn.btn-warning,
@@ -414,7 +412,7 @@ body .container-fluid .well-danger {
 .input-group-btn .btn.btn-raised:not(.btn-link):active.btn-info,
 .input-group-btn .btn.btn-raised:not(.btn-link):focus.btn-info,
 .input-group-btn .btn.btn-raised:not(.btn-link):hover.btn-info {
-    background-color: #0fb2fc
+    background-color: #d52027
 }
 .btn-group-raised .btn:not(.btn-link).active.btn-warning,
 .btn-group-raised .btn:not(.btn-link):active.btn-warning,

@@ -11,11 +11,10 @@ You can find the source code for this Jekyll theme at: [github.com/ashutosh2k12/
 You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
 -->
 
-I'm a fourth year mathematics and computer science student at Grinnell College.
+I'm an incoming first-year graduate student of applied mathematics at Stony Brook University.
 Over the course of my time here, I've done some stuffs, and I have accumulated
 some of these stuffs on this site. I have (always unintentionally) rambly blog
 posts, usually about the latest book I read or a technology I'm playing with.
-
 
 ## Courses
 I have co-taught two courses at Grinnell through the Grinnell Experimental

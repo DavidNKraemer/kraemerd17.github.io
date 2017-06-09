@@ -145,6 +145,7 @@ span.tags {
     margin: 0 2px;
     cursor: pointer;
     display: inline-block;
+    background: #4b4b4b;
 }
 .card .card-image .card-image-headline-custom {
     position: absolute;
